@@ -1,0 +1,10 @@
+= Energy estimator
+
+Energy estimator is a neural network which predicts the light power consumption.
+
+
+== License
+
+Copyright (c) 2012 Francesco Disperati, Dario Grassini, Davide Pellegrino, Nilo Redini
+
+Released under GNU GPLv3 or later (http://www.gnu.org/licenses/gpl-3.0.txt)
