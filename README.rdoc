@@ -1,6 +1,6 @@
-= Energy estimator
+= Ride the Lighting
 
-Energy estimator is a neural network which predicts the light power consumption.
+*Ride the Lighting* is a neural network analysis which predicts the light power consumption.
 
 
 == License
