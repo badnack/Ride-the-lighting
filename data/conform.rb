@@ -17,16 +17,29 @@ WORKDAY   = 8
 
 filepath = ARGV[0]
 
-input = CSV.open( "input.csv", "w")
-target = CSV.open( "target.csv", "w")
+inputHoliday = CSV.open( "inputHoliday.csv", "w")
+targetHoliday = CSV.open( "targetHoliday.csv", "w")
+
+inputWork = CSV.open( "inputWork.csv", "w")
+targetWork = CSV.open( "targetWork.csv", "w")
+
 
 CSV.foreach( filepath ) do |row|
-  date = "%02d%02d" % [ row[MONTH], row[DAY] ]
-  time = "%02d%02d" % [ row[HOUR], row[MINUTE] ]
 
-  input  << [ date, time, row[OUT_LIGHT], row[WORKDAY] ]
-  target << [ row[IN_LIGHT], row[ENERGY] ]
+  day = row[WORKDAY]
+
+
+  if day == "0" then
+    inputHoliday  << [ row[MONTH], row[DAY], row[HOUR], row[MINUTE], row[OUT_LIGHT] ]
+    targetHoliday << [ row[IN_LIGHT], row[ENERGY] ]
+  else
+    inputWork  << [ row[MONTH], row[DAY], row[HOUR], row[MINUTE], row[OUT_LIGHT] ]
+    targetWork << [ row[IN_LIGHT], row[ENERGY] ]
+  end
+
 end
 
-input.close
-target.close
+inputHoliday.close
+targetHoliday.close
+inputWork.close
+targetWork.close
