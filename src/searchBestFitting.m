@@ -1,3 +1,5 @@
+% -*- mode: matlab -*-
+
 function [ network, training, out, err ] = searchBestFitting (varargin)
     ERROR_TO_REACH = 0.02;
 

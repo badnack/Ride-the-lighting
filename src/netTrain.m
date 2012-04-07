@@ -1,3 +1,5 @@
+% -*- mode: matlab -*-
+
 function netTrain
     load ../data/inputWork.csv;
     load ../data/targetWork.csv;
