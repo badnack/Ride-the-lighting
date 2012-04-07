@@ -49,7 +49,7 @@ function [ network, training, out, err ] = searchBestFitting (varargin)
             % ad-hoc functions
             currentRegression  = getRegression ( target, outputs )
             bestRegression
-            currentThreshError = Errhis ( currentErrors )
+            currentThreshError = getErrorHistogram ( currentErrors )
             bestThreshError
 
 

@@ -41,16 +41,16 @@ CSV.foreach( filepath ) do |row|
 
   # make averages
   if row[MINUTE].to_i == HALF_HOUR  
-    sOutLight = row[OUT_LIGHT].to_i
-    sInLight = row[IN_LIGHT].to_i
-    sEnergy = row[ENERGY].to_i
+    sOutLight = row[OUT_LIGHT].to_f
+    sInLight = row[IN_LIGHT].to_f
+    sEnergy = row[ENERGY].to_f
     next
   end
 
   if row[MINUTE].to_i == HOUR_OCLOCK
-    sOutLight = ( sOutLight + row[OUT_LIGHT].to_i ) / 2
-    sInLight  = ( sInLight + row[IN_LIGHT].to_i ) / 2
-    sEnergy = ( sEnergy + row[ENERGY].to_i ) / 2    
+    sOutLight = ( sOutLight + row[OUT_LIGHT].to_f ) / 2
+    sInLight  = ( sInLight + row[IN_LIGHT].to_f ) / 2
+    sEnergy = ( sEnergy + row[ENERGY].to_f ) / 2    
   end
 
   day = row[WORKDAY]
