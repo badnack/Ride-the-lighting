@@ -2,6 +2,13 @@
 #
 # Create an input and target matrix from given CSV
 require "csv"
+require "date"
+
+
+# Options
+datapath   = "data.csv"
+input_all  = "inputAll.csv"
+target_all = "targetAll.csv"
 
 
 # CSV fields position
@@ -21,52 +28,39 @@ HOUR_OCLOCK = 0
 START_NIGHT_HOUR = 23
 END_NIGHT_HOUR = 4
 
-filepath = ARGV[0]
+input  = CSV.open( input_all, "w")
+target = CSV.open( target_all, "w")
 
-inputHoliday = CSV.open( "inputHoliday.csv", "w")
-targetHoliday = CSV.open( "targetHoliday.csv", "w")
+average_outlight = 0
+average_inlight = 0
+average_energy = 0
+CSV.foreach( datapath ) do |row|
 
-inputWork = CSV.open( "inputWork.csv", "w")
-targetWork = CSV.open( "targetWork.csv", "w")
-
-sOutLight = 0
-sInLight = 0
-sEnergy = 0
-CSV.foreach( filepath ) do |row|
-
-  #nights hours to jump
+  #nights hours to skip
   if ( row[HOUR].to_i > START_NIGHT_HOUR || row[HOUR].to_i < END_NIGHT_HOUR  ) 
     next
   end
 
-  # make averages
+  # averages 
   if row[MINUTE].to_i == HALF_HOUR  
-    sOutLight = row[OUT_LIGHT].to_f
-    sInLight = row[IN_LIGHT].to_f
-    sEnergy = row[ENERGY].to_f
+    average_outlight = row[OUT_LIGHT].to_f
+    average_inlight = row[IN_LIGHT].to_f
+    average_energy = row[ENERGY].to_f
     next
   end
 
   if row[MINUTE].to_i == HOUR_OCLOCK
-    sOutLight = ( sOutLight + row[OUT_LIGHT].to_f ) / 2
-    sInLight  = ( sInLight + row[IN_LIGHT].to_f ) / 2
-    sEnergy = ( sEnergy + row[ENERGY].to_f ) / 2    
+    average_outlight = ( average_outlight + row[OUT_LIGHT].to_f ) / 2
+    average_inlight  = ( average_inlight + row[IN_LIGHT].to_f ) / 2
+    average_energy = ( average_energy + row[ENERGY].to_f ) / 2    
   end
 
-  day = row[WORKDAY]
+  weekday = Date.new( row[YEAR].to_i, row[MONTH].to_i, row[DAY].to_i ).cwday
 
-  if day == "0" then
-    inputHoliday  << [ row[MONTH], row[DAY], row[HOUR], sOutLight.to_s ]
-    targetHoliday << [ sInLight.to_s, sEnergy.to_s ]
-  else
-
-    inputWork  << [ row[MONTH], row[DAY], row[HOUR], sOutLight.to_s ]
-    targetWork << [ sInLight.to_s, sEnergy.to_s ]
-  end
-
+  input  << [ row[MONTH], weekday, row[HOUR], average_outlight.to_s ]
+  target << [ average_inlight.to_s, average_energy.to_s ]
+ 
 end
 
-inputHoliday.close
-targetHoliday.close
-inputWork.close
-targetWork.close
+input.close
+target.close
