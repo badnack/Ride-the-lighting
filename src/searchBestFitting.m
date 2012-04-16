@@ -1,90 +1,68 @@
 % -*- mode: matlab -*-
+%
+% Search best neural network
+%
+% Output: [network, training, outputs, errors]
 
-function [ network, training, out, err ] = searchBestFitting (varargin)
-    ERROR_TO_REACH = 0.02;
+function [ network, training, outputs, errors ] = searchBestFitting( inputs, targets )
+    GOAL_MSE = 5000;
+    GOAL_REGRESSION = 0.95;
 
-    RETRAIN_ATTEMPT = 10;
+    HIDDEN_LAYER_SIZE_TRIES = 10:20;
 
-    REGRESSION_TO_REACH = 0.91;
+    TRAIN_RATIO     = 0.90;
+    VALUATION_RATIO = 0.05;
+    TEST_RATIO      = 0.05;
 
-    INIT_HIDDEN_LAYER_SIZE = 10;
+    RETRAIN_ATTEMPTS = 10;
 
-    MAX_HIDDEN_LAYER_SIZE = 21;
+    bestMSE = inf;
+    bestReg = 0;
 
-    TRAIN     =  0.9;
-    VALUATION = 0.05;
-    TEST      = 0.05;
+    for i = HIDDEN_LAYER_SIZE_TRIES
+        net = fitnet( i );
 
+        net.divideFcn = 'dividerand';
+        net.divideMode = 'sample';
+        net.divideParam.trainRatio = TRAIN_RATIO;
+        net.divideParam.valRatio   = VALUATION_RATIO;
+        net.divideParam.testRatio  = TEST_RATIO;
 
+        net.trainFcn = 'trainlm';  % Levenberg-Marquardt
+        net.performFcn = 'mse';
 
-    % Variables initilizations
-    inputs = varargin{1};
-    target = varargin{2};
+        % No GUI
+        net.trainParam.showWindow = false;
+        net.trainParam.showCommandLine = false;
 
-    bestThreshError = inf;
-    bestRegression = 0;
-    stop = 0;
-    hiddenLayerSize = INIT_HIDDEN_LAYER_SIZE;
-
-    while ( stop == 0 )
-
-        net = fitnet ( hiddenLayerSize );
-
-
-        net.divideParam.trainRatio = TRAIN;
-        net.divideParam.valRatio   = VALUATION;
-        net.divideParam.testRatio  = TEST;
-
-        for i = 1:RETRAIN_ATTEMPT
-            net = init ( net );
+        for j = 1:RETRAIN_ATTEMPTS
+            disp( sprintf( 'HiddenLayerSize: %d - Attempt #%d', i, j) );
+            net = init( net );
 
             % Train the Network
-            [ net, tr ] = train ( net, inputs, target );
+            [ net, tr ] = train( net, inputs, targets );
 
             % Test the Network
-            outputs          = net ( inputs );
-            currentErrors    = gsubtract ( target, outputs );
-            performance      = perform ( net, target, outputs );
+            out = net( inputs );
+            err = gsubtract( targets, out );
+            mse = perform( net, targets, out );
+            reg = regression( targets, out, 'one' );
 
-            % ad-hoc functions
-            currentRegression  = getRegression ( target, outputs )
-            bestRegression
-            currentThreshError = getErrorHistogram ( currentErrors )
-            bestThreshError
+            if ( mse < bestMSE && reg > bestReg )
+                disp( 'Best net found!' );
+                bestMSE  = mse
+                bestReg  = reg
+                network  = net;
+                training = tr;
+                outputs  = out;
+                errors   = err;
 
-
-            if ( abs ( currentThreshError ) < abs ( bestThreshError ) && currentRegression > bestRegression )
-
-                % Best value Reached
-                if ( abs ( currentThreshError ) <= ERROR_TO_REACH  && currentRegression >= REGRESSION_TO_REACH )
-                    stop = 1;
+                % Goal reached
+                if ( mse <= GOAL_MSE  && reg >= GOAL_REGRESSION )
+                    disp('Goal reached!');
+                    return
                 end
-
-                bestTraining    = tr;
-                bestNet         = net;
-                bestOutputs     = outputs;
-                bestErrors      = currentErrors;
-                bestThreshError = currentThreshError;
-                bestRegression  = currentRegression;
-
             end
 
-        end
-
-        hiddenLayerSize = hiddenLayerSize + 1;
-
-        if ( hiddenLayerSize == MAX_HIDDEN_LAYER_SIZE )
-            stop = 1;
-        end
-
-
-    end
-
-    % View the Network
-    network = bestNet;
-    training = bestTraining;
-    out = bestOutputs;
-    err = bestErrors
-    % Plots
-
-end
+        end  % RETRAIN_ATEMPTS end
+    end  % HIDDEN_LAYER_SIZE end
