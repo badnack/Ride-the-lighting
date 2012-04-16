@@ -37,9 +37,9 @@ average_energy = 0
 CSV.foreach( datapath ) do |row|
 
   #nights hours to skip
-  if ( row[HOUR].to_i > START_NIGHT_HOUR || row[HOUR].to_i < END_NIGHT_HOUR  ) 
-    next
-  end
+  # if ( row[HOUR].to_i > START_NIGHT_HOUR || row[HOUR].to_i < END_NIGHT_HOUR  ) 
+  #   next
+  # end
 
   # averages 
   if row[MINUTE].to_i == HALF_HOUR  
