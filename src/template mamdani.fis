@@ -1,0 +1,44 @@
+[System]
+Name='template mamdani Fis'
+Type='mamdani'
+Version=2.0
+NumInputs=2
+NumOutputs=1
+NumRules=0
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='orario'
+Range=[0 2330]
+NumMFs=7
+MF1='notte1':'trapmf',[-838.8 -93.2 300 450]
+MF2='prima-mattina':'trapmf',[300 450 750 950]
+MF3='notte2':'trapmf',[2150 2250 2423 3169]
+MF4='mattina':'trapmf',[750 900 1100 1250]
+MF5='primo-pome':'trapmf',[1100 1250 1400 1550]
+MF6='pome':'trapmf',[1400 1550 1800 1950]
+MF7='sera':'trapmf',[1800 1950 2150 2300]
+
+[Input2]
+Name='irraggiamento'
+Range=[0 1000]
+NumMFs=4
+MF1='basso':'trapmf',[-254.5 -65.41 55.41 244.5]
+MF2='medio':'trapmf',[148.7 301.2 398.8 551.3]
+MF3='molto-alto':'trapmf',[744.469026548673 929 1080 1320]
+MF4='alto':'trapmf',[448.7 601.2 698.8 851.3]
+
+[Output1]
+Name='consumo-energetico'
+Range=[0 350]
+NumMFs=4
+MF1='basso':'trimf',[-140 0 100]
+MF2='normale':'trimf',[50 125 200]
+MF3='alto':'trimf',[150 225 300]
+MF4='occhio-al-portafoglio':'trimf',[250 350 500]
+
+[Rules]
