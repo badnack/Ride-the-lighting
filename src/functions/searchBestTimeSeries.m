@@ -71,43 +71,32 @@ function [ network, training, outputs, errors ] = searchBestTimeSeries( inputs, 
             errors   = err;
             outputs  = out;
             training = tr;
-            % errcorr( errors );
+
+            valid = checkErrcorr( errors )
         end
     end
 
 end
 
-% Error autocorrelation
-function [ max_cor lim_cor ] = errcorr(e)
-  numSignals = length(e);
-
-  maxlag = 0;
-  ymin = 0;
-  ymax = 0;
-  confint = 0;
-  for i=1:numSignals
-    ei = nnfast.getelements(e{i}, 7.0);
-    maxlagi = min(20,numtimesteps(ei)-1);
-    maxlag = max(maxlag,maxlagi);
-    corr = nncorr(ei,ei,maxlagi,'unbiased');
+% Check error autocorrelation
+% Return true if autocorrelation not too bad
+function valid = checkErrcorr(e)
+    STEPS = 20;
+    corr = nncorr( e, e, STEPS, 'unbiased' );
     corr = corr{1,1};
-    confint = confint + corr(maxlagi+1)*2/sqrt(length(ei));
-    ymin = min(ymin,min(corr));
-    ymax = max(ymax,max(corr));
-  end
-  xlim = [-maxlag-1 maxlag+1];
-  confint = confint / numSignals;
-  ylim = [min(-confint,ymin) max(confint,ymax)];
-  ylim = ylim + ((ylim(2)-ylim(1))*0.1*[-1 1]);
-  lim_cor = confint;
-  max_cor = 0;
-  disp(abs(corr(31)));
-  for i=1:length(corr)
-      if(corr(i) ~= ymax)
-
-        if(abs(corr(i)) > max_cor)
-            max_cor = abs(corr(i));
+    corr_zero = nncorr( e, e, 0, 'unbiased' );
+    corr_zero = corr_zero{1,1}
+    maxlagi = min( STEPS, numtimesteps(e) - 1 );
+    corr_limit = corr( maxlagi+1 )*2 / sqrt( length(e) );
+    
+    bad_steps = 0;
+    for c = corr
+        if c > corr_limit*1.5
+            bad_steps = bad_steps + 1
         end
-      end
-  end
+    end
+    valid = true;
+    if bad_steps > 1
+        valid = false;
+    end
 end
