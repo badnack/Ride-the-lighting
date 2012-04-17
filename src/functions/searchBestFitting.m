@@ -5,10 +5,10 @@
 % Output: [network, training, outputs, errors]
 
 function [ network, training, outputs, errors ] = searchBestFitting( inputs, targets )
-    GOAL_MSE = 5000;
+    GOAL_MSE = 4000;
     GOAL_REGRESSION = 0.95;
 
-    HIDDEN_LAYER_SIZE_TRIES = 10:20;
+    HIDDEN_LAYER_SIZE_TRIES = 20:25;
 
     TRAIN_RATIO     = 0.90;
     VALUATION_RATIO = 0.05;
