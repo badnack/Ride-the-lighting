@@ -53,9 +53,11 @@ CSV.foreach( datapath ) do |row|
     average_energy = ( average_energy + row[ENERGY].to_f ) / 2
   end
 
-  weekday = Date.new( row[YEAR].to_i, row[MONTH].to_i, row[DAY].to_i ).cwday
+  date = Date.new( row[YEAR].to_i, row[MONTH].to_i, row[DAY].to_i )
+  weekday = date.cwday
+  weekoftheyear = date.cweek
 
-  input  << [ row[MONTH], weekday, row[HOUR], average_outlight ]
+  input  << [ weekoftheyear, weekday, row[HOUR], average_outlight ]
   target << [ average_inlight, average_energy ]
 
 end
