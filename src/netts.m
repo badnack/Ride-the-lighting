@@ -5,7 +5,7 @@ addpath('./functions');
 load '../data/inputAll.csv';
 load '../data/targetAll.csv';
 
-[ net, train, outputs, errors, inputs ] = searchBestTimeSeries( inputAll, targetAll );
+[ net, train, outputs, errors, inputs, targets ] = searchBestTimeSeries( inputAll, targetAll );
 
 % View the Network
 view(net)
@@ -14,7 +14,7 @@ view(net)
 % Uncomment these lines to enable various plots.
 figure, plotperform(train)
 figure, plottrainstate(train)
-% figure, plotregression(targetAll',outputs)
-% figure, plotresponse(targetAll,outputs)
+figure, plotregression(targets,outputs)
+figure, plotresponse(targets,outputs)
 figure, ploterrcorr(errors)
 figure, plotinerrcorr(inputs,errors)

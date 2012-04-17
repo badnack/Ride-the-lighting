@@ -2,9 +2,9 @@
 %
 % Search best NARX Neural Network
 %
-% Output: [network, training, outputs, errors]
+% Output: [network, training, outputs, errors, inputs, targets]
 
-function [ network, training, outputs, errors, inputs ] = searchBestTimeSeries( inputs, targets )
+function [ network, training, outputs, errors, inputs, targets ] = searchBestTimeSeries( inputs, targets )
     DELAYS = 2:8;
     HIDDEN_LAYER_SIZES = 20:25;
 
@@ -39,7 +39,7 @@ function [ network, training, outputs, errors, inputs ] = searchBestTimeSeries( 
             net.performFcn = 'mse';  % Mean squared error
 
             % No GUI
-            net.trainParam.showWindow = true;
+            net.trainParam.showWindow = false;
             net.trainParam.showCommandLine = false;
 
             net.plotFcns = {'plotperform','plottrainstate','plotresponse', 'ploterrcorr', 'plotinerrcorr'};
@@ -69,8 +69,8 @@ function [ network, training, outputs, errors, inputs ] = searchBestTimeSeries( 
                 outputs  = out;
                 training = tr;
 
-                errcorr = checkCorr( errors, errors )
-                inecorr = checkCorr( inputs, errors )
+                errcorr = checkCorr( errors, errors, 1.2 )
+                inecorr = checkCorr( inputs, errors, 15 ) % FIXME: tollerance too high!
 
                 if inecorr && errcorr
                     disp( 'Best net found!' );
@@ -84,7 +84,7 @@ end
 
 % Check error autocorrelation
 % Return TRUE if correlation values aren't too bad
-function valid = checkCorr( a, b )
+function valid = checkCorr( a, b, tollerance )
     STEPS = 20;
     size = min( length(a), length(b) );
     a = a(1,1:size);
@@ -98,7 +98,7 @@ function valid = checkCorr( a, b )
 
     bad_steps = 0;
     for c = corr
-        if abs(c) > abs(corr_limit*1.5)
+        if abs(c) > abs(corr_limit)*tollerance
             bad_steps = bad_steps + 1
         end
     end
