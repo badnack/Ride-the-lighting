@@ -54,15 +54,15 @@ function [ network, training, outputs, errors, inputs, targets ] = searchBestTim
                 % Test the Network
                 out = net(inputs,inputStates,layerStates);
                 err = gsubtract(targets,out);
-                mse = perform(net,targets,out)
+                mse = perform(net,targets,out);
 
                 % Recalculate Training, Validation and Test Performance
                 trainTargets = gmultiply(targets,tr.trainMask);
                 valTargets = gmultiply(targets,tr.valMask);
                 testTargets = gmultiply(targets,tr.testMask);
-                trainPerformance = perform(net,trainTargets,out)
-                valPerformance = perform(net,valTargets,out)
-                testPerformance = perform(net,testTargets,out)
+                trainPerformance = perform(net,trainTargets,out);
+                valPerformance = perform(net,valTargets,out);
+                testPerformance = perform(net,testTargets,out);
 
                 network  = net;
                 errors   = err;
@@ -92,14 +92,14 @@ function valid = checkCorr( a, b, tollerance )
     corr = nncorr( a, b, STEPS, 'unbiased' );
     corr = corr{1,1};
     corr_zero = nncorr( a, b, 0, 'unbiased' );
-    corr_zero = corr_zero{1,1}
+    corr_zero = corr_zero{1,1};
     maxlagi = min( STEPS, numtimesteps(a) - 1 );
     corr_limit = corr( maxlagi+1 )*2 / sqrt( length(a) );
 
     bad_steps = 0;
     for c = corr
         if abs(c) > abs(corr_limit)*tollerance
-            bad_steps = bad_steps + 1
+            bad_steps = bad_steps + 1;
         end
     end
     valid = true;
