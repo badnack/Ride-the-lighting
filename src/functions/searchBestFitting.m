@@ -5,19 +5,24 @@
 % Output: [network, training, outputs, errors]
 
 function [ network, training, outputs, errors ] = searchBestFitting( inputs, targets )
-    GOAL_MSE = 4000;
-    GOAL_REGRESSION = 0.95;
+    GOAL_MSE = 1000;
+    GOAL_REGRESSION = 0.99;
 
-    HIDDEN_LAYER_SIZE_TRIES = 20:25;
+    HIDDEN_LAYER_SIZE_TRIES = 10:26;
 
-    TRAIN_RATIO     = 0.90;
-    VALUATION_RATIO = 0.05;
-    TEST_RATIO      = 0.05;
+    TRAIN_RATIO     = 0.70;
+    VALUATION_RATIO = 0.15;
+    TEST_RATIO      = 0.15;
 
     RETRAIN_ATTEMPTS = 10;
 
     bestMSE = inf;
-    bestReg = 0;
+    bestValMse = inf;
+    bestTestMse = inf;
+
+    bestTotReg = 0;
+    bestTestReg = 0;
+    bestValReg = 0;
 
     for i = HIDDEN_LAYER_SIZE_TRIES
         net = fitnet( i );
@@ -45,20 +50,37 @@ function [ network, training, outputs, errors ] = searchBestFitting( inputs, tar
             % Test the Network
             out = net( inputs );
             err = gsubtract( targets, out );
-            mse = perform( net, targets, out );
-            reg = regression( targets, out, 'one' );
+            
+            
+            totMse = perform( net, targets, out );            
+            testMse = perform(net,targets(:,tr.testInd),out(:,tr.testInd));
+            valMse = perform(net,targets(:,tr.trainInd),out(:,tr.trainInd));
 
-            if ( mse < bestMSE && reg > bestReg )
+            totReg = regression( targets, out, 'one' );
+            trainingReg = regression(targets(:,tr.trainInd),out(:,tr.trainInd),'one');
+            valReg = regression(targets(:,tr.valInd), out(:,tr.valInd),'one');
+            testReg = regression(targets(:,tr.testInd),out(:,tr.testInd),'one');
+ 
+            
+
+            if ( valMse < bestValMse && totReg > bestTotReg && testMse < ...
+                 bestTestMse && totMse < bestMSE && testReg > ...
+                 bestTestReg && valReg > bestValReg)
+
                 disp( 'Best net found!' );
-                bestMSE  = mse
-                bestReg  = reg
+                bestMSE  = totMse;
+                bestTestMse = testMse;
+                bestValMse = valMse;
+                bestTotReg  = totReg;
+                bestTestReg = testReg;
+                bestValReg = valReg;
                 network  = net;
                 training = tr;
                 outputs  = out;
                 errors   = err;
 
                 % Goal reached
-                if ( mse <= GOAL_MSE  && reg >= GOAL_REGRESSION )
+                if ( totMse <= GOAL_MSE  && totReg >= GOAL_REGRESSION )
                     disp('Goal reached!');
                     return
                 end
