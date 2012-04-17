@@ -1,5 +1,5 @@
 [System]
-Name='template mamdani'
+Name='InLight mamdani'
 Type='mamdani'
 Version=2.0
 NumInputs=2
