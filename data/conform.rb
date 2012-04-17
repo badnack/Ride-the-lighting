@@ -22,11 +22,11 @@ IN_LIGHT  = 6
 ENERGY    = 7
 WORKDAY   = 8
 
-# time define
-HALF_HOUR = 30
+# time defines
+HOUR_HALF = 30
 HOUR_OCLOCK = 0
-START_NIGHT_HOUR = 23
-END_NIGHT_HOUR = 4
+# NIGHT_START_HOUR = 23
+# NIGHT_END_HOUR = 4
 
 input  = CSV.open( input_all, "w")
 target = CSV.open( target_all, "w")
@@ -36,30 +36,28 @@ average_inlight = 0
 average_energy = 0
 CSV.foreach( datapath ) do |row|
 
-  #nights hours to skip
-  # if ( row[HOUR].to_i > START_NIGHT_HOUR || row[HOUR].to_i < END_NIGHT_HOUR  ) 
+  # # nights hours to skip
+  # if ( row[HOUR].to_i > NIGHT_START_HOUR || row[HOUR].to_i < NIGHT_END_HOUR  )
   #   next
   # end
 
-  # averages 
-  if row[MINUTE].to_i == HALF_HOUR  
+  # Hour averages
+  if row[MINUTE].to_i == HOUR_HALF
     average_outlight = row[OUT_LIGHT].to_f
     average_inlight = row[IN_LIGHT].to_f
     average_energy = row[ENERGY].to_f
     next
-  end
-
-  if row[MINUTE].to_i == HOUR_OCLOCK
+  else
     average_outlight = ( average_outlight + row[OUT_LIGHT].to_f ) / 2
     average_inlight  = ( average_inlight + row[IN_LIGHT].to_f ) / 2
-    average_energy = ( average_energy + row[ENERGY].to_f ) / 2    
+    average_energy = ( average_energy + row[ENERGY].to_f ) / 2
   end
 
   weekday = Date.new( row[YEAR].to_i, row[MONTH].to_i, row[DAY].to_i ).cwday
 
-  input  << [ row[MONTH], weekday, row[HOUR], average_outlight.to_s ]
-  target << [ average_inlight.to_s, average_energy.to_s ]
- 
+  input  << [ row[MONTH], weekday, row[HOUR], average_outlight ]
+  target << [ average_inlight, average_energy ]
+
 end
 
 input.close
