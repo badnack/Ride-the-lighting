@@ -1,7 +1,7 @@
 % -*- mode: matlab -*-
 % Time Series model
 
-addpath('./functions');
+addpath('./time series/functions');
 load '../data/inputAll.csv';
 load '../data/targetAll.csv';
 

@@ -14,7 +14,7 @@ function [ network, training, outputs, errors ] = searchBestFitting( inputs, tar
     VALUATION_RATIO = 0.15;
     TEST_RATIO      = 0.15;
 
-    RETRAIN_ATTEMPTS = 10;
+    RETRAIN_ATTEMPTS = 50;
 
     bestValMse = inf;
     bestTestMse = inf;

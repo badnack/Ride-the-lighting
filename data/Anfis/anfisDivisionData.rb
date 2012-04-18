@@ -16,6 +16,10 @@ TRAIN_RATIO    = 0.8;
 TEST_RATIO     = 0.10;
 CHECKING_RATIO = 0.15;
 
+if ARGV.length == 0
+  puts "Usage: ./anfisDivisionData DATA SOURCE FILE"
+  exit
+end
 
 train    = File.open( trainAnfis, "w" )
 test     = File.open( testAnfis, "w" )

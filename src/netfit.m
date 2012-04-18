@@ -1,7 +1,7 @@
 % -*- mode: matlab -*-
 % Neural network fitting
 
-addpath('./functions');
+addpath('./neural network/functions');
 load '../data/inputAll.csv';
 load '../data/targetAll.csv';
 
