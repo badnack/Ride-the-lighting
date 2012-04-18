@@ -16,13 +16,9 @@ function [ network, training, outputs, errors ] = searchBestFitting( inputs, tar
 
     RETRAIN_ATTEMPTS = 10;
 
-    bestMSE = inf;
-    bestValMse = inf;
     bestTestMse = inf;
 
-    bestTotReg = 0;
     bestTestReg = 0;
-    bestValReg = 0;
 
     for i = HIDDEN_LAYER_SIZE_TRIES
         net = fitnet( i );
@@ -52,35 +48,24 @@ function [ network, training, outputs, errors ] = searchBestFitting( inputs, tar
             err = gsubtract( targets, out );
             
             
-            totMse = perform( net, targets, out );            
             testMse = perform(net,targets(:,tr.testInd),out(:,tr.testInd));
-            valMse = perform(net,targets(:,tr.trainInd),out(:,tr.trainInd));
 
-            totReg = regression( targets, out, 'one' );
-            trainingReg = regression(targets(:,tr.trainInd),out(:,tr.trainInd),'one');
-            valReg = regression(targets(:,tr.valInd), out(:,tr.valInd),'one');
             testReg = regression(targets(:,tr.testInd),out(:,tr.testInd),'one');
  
             
 
-            if ( valMse < bestValMse && totReg > bestTotReg && testMse < ...
-                 bestTestMse && totMse < bestMSE && testReg > ...
-                 bestTestReg && valReg > bestValReg)
+            if ( testMse < bestTestMse && testReg > bestTestReg )
 
                 disp( 'Best net found!' );
-                bestMSE  = totMse;
                 bestTestMse = testMse;
-                bestValMse = valMse;
-                bestTotReg  = totReg;
                 bestTestReg = testReg;
-                bestValReg = valReg;
                 network  = net;
                 training = tr;
                 outputs  = out;
                 errors   = err;
 
                 % Goal reached
-                if ( totMse <= GOAL_MSE  && totReg >= GOAL_REGRESSION )
+                if ( testMse <= GOAL_MSE  && testReg >= GOAL_REGRESSION )
                     disp('Goal reached!');
                     return
                 end
