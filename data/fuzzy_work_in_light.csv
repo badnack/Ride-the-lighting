@@ -1,0 +1,29 @@
+orario;irraggiamento;luminosità;;;basso;medio;alto
+mattina;medio;bassa;10;;0,1282051282;;
+mattina;medio;media;61;;;0,7820512821;
+mattina;alto;media;49;;;0,8596491228;
+mattina;molto alto;media;20;;;0,6451612903;
+mattina;molto alto;bassa;8;;0,2580645161;;
+mattina;basso;bassa;27;;0,6136363636;;
+mattina;basso;media;17;;;0,3863636364;
+mattina;molto alto;alta;3;;;;0,0967741935
+mattina;alto;bassa;3;;0,0526315789;;
+mattina;medio;alta;7;;;;0,0897435897
+mattina;alto;alta;5;;;;0,0877192982
+notte;basso;bassa;207;;1;;
+pome;molto alto;bassa;37;;0,5;;
+pome;alto;bassa;38;;0,6785714286;;
+pome;medio;bassa;21;;0,3620689655;;
+pome;molto alto;media;37;;;0,5;
+pome;medio;media;32;;;0,5517241379;
+pome;alto;media;13;;;0,2321428571;
+pome;basso;bassa;12;;0,5454545455;;
+pome;medio;alta;5;;;;0,0862068966
+pome;basso;media;10;;;0,4545454545;
+pome;alto;alta;5;;;;0,0892857143
+prima mattina;basso;bassa;124;;0,9841269841;;
+prima mattina;basso;media;2;;;0,0158730159;
+sera;medio;bassa;25;;0,9259259259;;
+sera;basso;bassa;222;;0,9866666667;;
+sera;medio;media;2;;;0,0740740741;
+sera;basso;media;3;;;0,0133333333;
