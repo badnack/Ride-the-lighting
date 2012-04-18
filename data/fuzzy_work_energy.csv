@@ -1,0 +1,29 @@
+orario;irraggiamento;energia consumata;;;basso;medio;alto
+mattina;medio;medio;29;;;0,3717948718;
+mattina;medio;basso;49;;0,6282051282;;
+mattina;alto;medio;25;;;0,4385964912;
+mattina;molto alto;medio;18;;;0,5806451613;
+mattina;basso;medio;18;;;0,4090909091;
+mattina;basso;basso;26;;0,5909090909;;
+mattina;alto;basso;32;;0,5614035088;;
+mattina;molto alto;basso;13;;0,4193548387;;
+notte;basso;basso;207;;1;;
+pome;molto alto;medio;38;;;0,5135135135;
+pome;alto;medio;30;;;0,5357142857;
+pome;medio;medio;31;;;0,5344827586;
+pome;molto alto;basso;35;;0,472972973;;
+pome;medio;basso;22;;0,3793103448;;
+pome;alto;basso;24;;0,4285714286;;
+pome;basso;basso;9;;0,4090909091;;
+pome;basso;medio;13;;;0,5909090909;
+pome;medio;alto;5;;;;0,0862068966
+pome;alto;alto;2;;;;0,0357142857
+pome;molto alto;alto;1;;;;0,0135135135
+prima mattina;basso;basso;111;;0,880952381;;
+prima mattina;basso;medio;11;;;0,0873015873;
+prima mattina;basso;alto;4;;;;0,0317460317
+sera;medio;medio;13;;;0,4814814815;
+sera;basso;basso;209;;0,9288888889;;
+sera;medio;basso;12;;0,4444444444;;
+sera;basso;medio;16;;;0,0711111111;
+sera;medio;alto;2;;;;0,0740740741

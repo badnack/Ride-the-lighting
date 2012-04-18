@@ -1,0 +1,50 @@
+[System]
+Name='InLight Work'
+Type='mamdani'
+Version=2.0
+NumInputs=2
+NumOutputs=1
+NumRules=9
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='orario'
+Range=[0 23]
+NumMFs=5
+MF1='notte':'trapmf',[0 0 4 5]
+MF2='prima-mattina':'trapmf',[4 5 7.5 8.5]
+MF3='mattina':'trapmf',[7.5 8.5 12.5 13.5]
+MF4='pome':'trapmf',[12.5 13.5 17.5 18.5]
+MF5='sera':'trapmf',[17.5 18.5 23 23]
+
+[Input2]
+Name='irraggiamento'
+Range=[0 1000]
+NumMFs=4
+MF1='basso':'trapmf',[0 0 100 300]
+MF2='medio':'trapmf',[100 300 400 600]
+MF3='molto-alto':'trapmf',[700 900 1000 1000]
+MF4='alto':'trapmf',[400 600 700 900]
+
+[Output1]
+Name='luminosita'
+Range=[0 500]
+NumMFs=3
+MF1='bassa':'trimf',[0 0 200]
+MF2='media':'trimf',[50 250 450]
+MF3='alta':'trimf',[296 500 500]
+
+[Rules]
+1 0, 1 (1) : 1
+2 0, 1 (1) : 1
+3 1, 1 (1) : 1
+3 -1, 2 (1) : 1
+4 1, 1 (1) : 1
+4 2, 2 (1) : 1
+4 4, 1 (1) : 1
+4 3, 2 (1) : 1
+5 0, 1 (1) : 1
