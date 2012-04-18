@@ -56,10 +56,6 @@ average_energy = 0
 
 CSV.foreach( datapath ) do |row|
 
-  # Skip extreme outliers
-  # unless ( part..arr ).include? n
-  #   next 
-  # end
 
   #first outliers
   if row[WORKDAY].to_i == 1
@@ -107,6 +103,7 @@ CSV.foreach( datapath ) do |row|
 
   end
 
+  
 
 
   # Hour averages
@@ -120,6 +117,10 @@ CSV.foreach( datapath ) do |row|
     average_inlight  = ( average_inlight + row[IN_LIGHT].to_f ) / 2
     average_energy = ( average_energy + row[ENERGY].to_f ) / 2
   end
+
+  # if average_inlight > 1000
+  #   next
+  # end
 
   date = Date.new( row[YEAR].to_i, row[MONTH].to_i, row[DAY].to_i )
   weekday = date.cwday

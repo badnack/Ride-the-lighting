@@ -51,7 +51,6 @@ function [ network, training, outputs, errors ] = searchBestFitting( inputs, tar
             testMse = perform(net,targets(:,tr.testInd),out(:,tr.testInd));
 
             testReg = regression(targets(:,tr.testInd),out(:,tr.testInd),'one');
- 
             
 
             if ( testMse < bestTestMse && testReg > bestTestReg )
