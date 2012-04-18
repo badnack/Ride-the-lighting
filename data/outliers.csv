@@ -1,0 +1,44 @@
+## energy outliers
+   hour;out_light;energy
+
+   #workday
+   pome; alto; alto; 2; ;;;0,0357142857
+   pome; molto alto; alto; 1;;;; 0,0135135135
+   pome;medio;alto;5;;;;0,0862068966
+
+
+   #holiday
+   pome;medio;medio;1;;;0,0434782609;
+   mattina;molto alto;alto;1;;;;0,0416666667   
+   mattina;molto alto;medio;4;;;0,1666666667;
+   mattina;basso;medio;2;;;0,1;
+   pome;alto;medio;4;;;0,1379310345;
+
+
+## in_light outliers
+   hour;out_light;in_light;
+   
+   #workday
+   sera;basso;media;1;;;0,0085470085;
+   sera;basso;media;3;;;0,0133333333;
+   prima mattina;basso;media;2;;;0,0158730159;
+   sera;medio;media;2;;;0,0740740741;
+   pome;alto;alta;5;;;;0,0892857143
+   pome;medio;alta;5;;;;0,0862068966
+   mattina;alto;alta;5;;;;0,0877192982
+   mattina;molto alto;alta;3;;;;0,0967741935
+
+
+   #holiday
+   prima mattina;basso;media;1;;;0,0151515152;
+   mattina;medio;bassa;3;;0,0769230769;;
+   mattina;alto;bassa;4;;0,1481481481;;
+   mattina;medio;alta;4;;;;0,1025641026
+   mattina;alto;alta;3;;;;0,1111111111
+   pome;molto alto;alta;2;;;;0,0444444444
+   mattina;alto;bassa;3;;0,0526315789;;
+   sera;medio;media;1;;;0,0666666667;
+   pome;medio;alta;1;;;;0,0434782609
+   pome;alto;media;5;;;0,1724137931;
+
+# ADDED

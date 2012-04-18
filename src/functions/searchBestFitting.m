@@ -16,9 +16,11 @@ function [ network, training, outputs, errors ] = searchBestFitting( inputs, tar
 
     RETRAIN_ATTEMPTS = 10;
 
+    bestValMse = inf;
     bestTestMse = inf;
 
     bestTestReg = 0;
+    bestValReg = 0;
 
     for i = HIDDEN_LAYER_SIZE_TRIES
         net = fitnet( i );
@@ -49,15 +51,22 @@ function [ network, training, outputs, errors ] = searchBestFitting( inputs, tar
             
             
             testMse = perform(net,targets(:,tr.testInd),out(:,tr.testInd));
+            valMse = perform(net,targets(:,tr.trainInd),out(:,tr.trainInd));
 
+            valReg = regression(targets(:,tr.valInd), out(:,tr.valInd),'one');
             testReg = regression(targets(:,tr.testInd),out(:,tr.testInd),'one');
+ 
             
 
-            if ( testMse < bestTestMse && testReg > bestTestReg )
+            if ( valMse < bestValMse && testMse < ...
+                 bestTestMse && testReg > ...
+                 bestTestReg && valReg > bestValReg)
 
                 disp( 'Best net found!' );
                 bestTestMse = testMse;
+                bestValMse = valMse;
                 bestTestReg = testReg;
+                bestValReg = valReg;
                 network  = net;
                 training = tr;
                 outputs  = out;

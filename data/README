@@ -1,0 +1,15 @@
+Scripts and directories contents
+===============================
+
+* The fuzzy directory contains fis file used to modelling a fuzzy network.
+
+* The Anfis directory contains file and data about anfis network.
+
+* conform.rb is a ruby script used to generate an elaboration of data.csv ( original samples) which will be used by
+  all others scripts.
+  conform.rb generates two different files: 
+  * inputAll: new input matrix
+  * targetAll: new target matrix
+
+
+
