@@ -33,23 +33,29 @@ average_energy = 0
 lines = File.readlines(ARGV[0])
 size = lines.size
 
-lines_checking = 0;
-lines_test = 0;
-lines_train = 0;
+lines_checking = lines.length * CHECKING_RATIO
+lines_test = lines.length * TEST_RATIO
+lines_train = lines.length * TRAIN_RATIO
 
-lines.each do |line|
-  choice = rand(2)
-  if choice == 0 and lines_checking < (size * CHECKING_RATIO)
-    checking << line
-    lines_checking += 1
-  elsif (choice == 1 or lines_checking >= (size * CHECKING_RATIO)) and lines_test < (size * TEST_RATIO)
-    test << line
-    lines_test += 1
-  elsif (choice == 2 or lines_test >= (size * TEST_RATIO)) and lines_test < (size * TRAIN_RATIO)
-    train << line
-    lines_train += 1
-  end
+
+for i in 1..lines_train do
+  index = rand*lines.length.to_i
+  train << lines[index-1]
+  lines.delete_at index-1
 end
+
+for i in 1..lines_checking do
+  index = rand*lines.length.to_i
+   checking << lines[index-1]
+  lines.delete_at index-1
+end
+
+for i in 1..lines_test do
+  index = rand*lines.length.to_i
+  test << lines[index-1]
+  lines.delete_at index-1
+end
+
 
 train.close
 test.close
