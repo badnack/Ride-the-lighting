@@ -1,0 +1,26 @@
+Directories definition
+======================
+
+contents
+--------
+
+* These directories contains many matlab workspaces in order to test the nerural network.
+  Most important parameters presnet in each .mat file are:
+  * net: the neural network
+  * inputAll: inputs used with the network    
+  * targetAll: targets we want the network reaches
+  * targetTest: targets used to test the network responsivity
+  * targetTrain: targets used to train the network
+  * targetVal: targets used to validate the network
+  * train: the train parameters obtained after the network training
+  * outputs: the network outputs obtained
+  * errors: errors received
+  * errorsTest: errors received during the test phase
+  * errorsTrain: errors received during the train phase
+  * errorsVal: errors received during the validation phase
+
+
+IMPORTANT:
+----------
+best results are conteined in Best net using test and validation values, and removed some outliers [c: f48c25084] 
+  
