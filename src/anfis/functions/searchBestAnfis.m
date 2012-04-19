@@ -7,7 +7,7 @@
 function [ network, bestTrainErrors, bestTestErrors, bestCheckErrors ] = searchBestAnfis( trnData, chData, testData )
 
     EPOCHES_VALUES = [30:35];
-    ATTEMPTS = [10:20];
+    ATTEMPTS = [1:8];
     MIN_MS = [4 4];
     MAX_MS = [8 8];
 
@@ -28,12 +28,14 @@ function [ network, bestTrainErrors, bestTestErrors, bestCheckErrors ] = searchB
 
     % tries the same epoch ATTEMPTS times
     for epoch_n = EPOCHES_VALUES
+        numMFs  = MIN_MS;
+        
         for i = ATTEMPTS
-            disp(sprintf( 'Epoches #%d - Attempt #%d', epoch_n,( i - ATTEMPTS(1) + 1 ) ) );
+            disp(sprintf( 'Epoches #%d - Attempt #%d', epoch_n, i + 1  ) );
 
             % generates a fis with 5 gaussian bell membership functions for each input
             in_fis = genfis1( trnData, numMFs, mfType );
-
+            
             %anfis
             [ out_fis, error, ss, chkFis, chkErr ] = anfis( trnData, in_fis, epoch_n, silent_mode, chData, 1 );
 
@@ -55,7 +57,13 @@ function [ network, bestTrainErrors, bestTestErrors, bestCheckErrors ] = searchB
                 bestTrainErrors = error;
                 bestCheckErrors = chkErr;
             end
-            %mse
+            
+            mse
+            
+            %if i < 5 
+            %   numMFs(1) = numMFs(1) + 1;
+            %else numMFs(2) = numMFs(2) + 1;
+            %end
 
         end
 
