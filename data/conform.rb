@@ -9,7 +9,7 @@ require "date"
 datapath   = "data.csv"
 input_all  = "inputAll.csv"
 target_all = "targetAll.csv"
-
+new_data   = "conformData.csv"
 
 # CSV fields position
 DAY       = 0
@@ -50,6 +50,7 @@ IN_LIGHT_HIGH       = 1300
 
 input  = CSV.open( input_all, "w")
 target = CSV.open( target_all, "w")
+newdata = CSV.open( new_data, "w")
 
 average_outlight = 0
 average_inlight = 0
@@ -128,10 +129,11 @@ CSV.foreach( datapath ) do |row|
   weekday = date.cwday
   weekoftheyear = date.cweek
 
-  input  << [ weekoftheyear, weekday, row[HOUR], average_outlight ]
-  target << [ average_inlight, average_energy ]
-
+  input   << [ weekoftheyear, weekday, row[HOUR], average_outlight ]
+  target  << [ average_inlight, average_energy ]
+  newdata << [ weekoftheyear, weekday, row[HOUR], average_outlight,average_inlight, average_energy ]
 end
 
 input.close
 target.close
+newdata.close
