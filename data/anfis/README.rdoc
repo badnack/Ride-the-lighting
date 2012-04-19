@@ -1,8 +1,7 @@
 Script and directories contents
 ===============================
 
-* The data directory contains a collection of data to improve the anfis network training, and the
-  script used to generate it. 
+* The data directory contains scripts to generate a collection of data to improve the anfis network training.
 
 * anfisDivisionData.rb split the input/output files in 3 different csv file:
   * checkingAnfis.csv: provides the necessary data to check the anfis network

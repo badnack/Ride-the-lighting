@@ -132,6 +132,7 @@ CSV.foreach( datapath ) do |row|
   input   << [ weekoftheyear, weekday, row[HOUR], average_outlight ]
   target  << [ average_inlight, average_energy ]
   newdata << [ weekoftheyear, weekday, row[HOUR], average_outlight,average_inlight, average_energy ]
+
 end
 
 input.close
