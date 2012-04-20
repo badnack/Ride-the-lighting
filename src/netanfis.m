@@ -21,12 +21,10 @@ testErrorsHoliday = inf;
 testErrorsWorkInl = inf;
 testErrorsWorkEn  = inf;
 
-%FIXME: save also the best files generated
-
 for i = ITERATION
 
     % holiday Inlight
-     disp('Searching anfis network to estimate holiday inlight.');   
+     disp( sprintf( ['Searching anfis network to estimate holiday inlight. Attempt #%d'], i ) );
     [ networkHoliday, trainErrors, testErrors, checkErrors, nMF, mse ...
     ] =  searchBestAnfis( trainAnfis, checkingAnfis, testAnfis );
     if mse < bestMseHoliday
@@ -48,7 +46,7 @@ for i = ITERATION
     disp('Holidays data files re-generated');
 
     % workday Energy
-    disp('Searching anfis network to estimate workday energy.');
+    disp( sprintf( ['Searching anfis network to estimate workday energy. Attempt #%d'], i ) );
     [ networkWorkE, trainErrors, testErrors, checkErrors, nMF, mse ...
     ] =  searchBestAnfis( trainAnfisEnergy, checkingAnfisEnergy, testAnfisEnergy );
     if mse < bestMseWorkEn
@@ -65,7 +63,7 @@ for i = ITERATION
     end
 
     % workday InLight
-    disp('Searching anfis network to estimate workday inlight.');
+    disp( sprintf( ['Searching anfis network to estimate workday inlight. Attempt #%d'], i ) );
     [ networkWorkInl, trainErrors, testErrors, checkErrors, nMF, mse ...
     ] =  searchBestAnfis( trainAnfisInlight, checkingAnfisInlight, testAnfisInlight );
     if mse < bestMseWorkInl
