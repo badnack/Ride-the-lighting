@@ -1,7 +1,9 @@
 Script and directories contents
 ===============================
 
-* The data directory contains scripts to generate a collection of data to improve the anfis network training.
+* holiday.rb generates a file containing most representative data for the 
+  holidays. File generated is:
+  * holiday_inlight.csv which report inlight data
 
 * anfisDivisionData.rb split the input/output files in 3 different csv file:
   * checkingAnfis.csv: provides the necessary data to check the anfis network
