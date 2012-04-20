@@ -6,9 +6,9 @@ require "date"
 
 
 # paths
-@datapath = "../conformData.csv"
-@trainAnfis  = "split/holiday/trainAnfis.csv"
-@testAnfis = "split/holiday/testAnfis.csv"
+@datapath      = "../conformData.csv"
+@trainAnfis    = "split/holiday/trainAnfis.csv"
+@testAnfis     = "split/holiday/testAnfis.csv"
 @checkingAnfis = "split/holiday/checkingAnfis.csv"
 
 # Costraints
