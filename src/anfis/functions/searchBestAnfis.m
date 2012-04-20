@@ -8,10 +8,10 @@ function [ network, bestTrainErrors, bestTestErrors, bestCheckErrors ] = searchB
 
     EPOCHES_VALUES = [30:35];
     GOAL_MSE       = 50;    
-    MS_VALUES      = [3:7];
-    MS_INIT        = [ MS_VALUES(1), MS_VALUES(1) ];
+    MF_VALUES      = [3:7];
+    MF_INIT        = [ MF_VALUES(1), MF_VALUES(1) ];
     
-    numMFs  = MS_INIT;
+    numMFs  = MF_INIT;
     mfType  = 'gbellmf';
 
     test_inputs = testData(:,1:2);
@@ -29,11 +29,11 @@ function [ network, bestTrainErrors, bestTestErrors, bestCheckErrors ] = searchB
     % tries the same differents epoches
     for epoch_n = EPOCHES_VALUES
 
-        numMFs  = MS_INIT;
+        numMFs  = MF_INIT;
 
         % tries each values between Ms min value and ms max value
-        for i = MS_VALUES
-            for j = MS_VALUES
+        for i = MF_VALUES
+            for j = MF_VALUES
 
                 numMFs  = [ i, j ];                
                 
