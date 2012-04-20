@@ -7,12 +7,12 @@ require "date"
 
 # paths
 @datapath = "../conformData.csv"
-@trainInlight  = "split/workday/trainAnfisInlight.csv"
-@testInlight = "split/workday/testAnfisInlight.csv"
-@checkingInlight = "split/workday/checkingAnfisInlight.csv"
-@trainEnergy  = "split/workday/trainAnfisEnergy.csv"
-@testEnergy = "split/workday/testAnfisEnergy.csv"
-@checkingEnergy = "split/workday/checkingAnfisEnergy.csv"
+@trainInlight  = "split/workday/trainInlight.csv"
+@testInlight = "split/workday/testInlight.csv"
+@checkingInlight = "split/workday/checkingInlight.csv"
+@trainEnergy  = "split/workday/trainEnergy.csv"
+@testEnergy = "split/workday/testEnergy.csv"
+@checkingEnergy = "split/workday/checkingEnergy.csv"
 
 # Costraints
 TRAIN_RATIO    = 0.7;

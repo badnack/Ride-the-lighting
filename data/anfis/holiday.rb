@@ -7,9 +7,9 @@ require "date"
 
 # paths
 @datapath      = "../conformData.csv"
-@trainAnfis    = "split/holiday/trainAnfis.csv"
-@testAnfis     = "split/holiday/testAnfis.csv"
-@checkingAnfis = "split/holiday/checkingAnfis.csv"
+@trainAnfis    = "split/holiday/train.csv"
+@testAnfis     = "split/holiday/test.csv"
+@checkingAnfis = "split/holiday/checking.csv"
 
 # Costraints
 TRAIN_RATIO    = 0.7;
