@@ -28,7 +28,7 @@ bestMseWorkEn  = inf;
 for i = ITERATION
 
     % holiday Inlight
-    disp( sprintf( ['Searching anfis network to estimate holiday inlight. Attempt #%d'], i ) );
+    disp( sprintf( ['\nHOLIDAY INLIGHT: Attempt #%d'], i ) );
     [ network, nMF, mse ] =  searchBestAnfis( train, checking, test );
     if mse < bestMseHoliday
         bestMfHoliday = nMF;
@@ -36,23 +36,13 @@ for i = ITERATION
         bestNetworkHoliday = network;
 
         % save also the file found!
-        % FIXME: find a best method
-        unix(['cd ../data/anfis/split/holiday; mv train.csv ' ...
-              'bestTrain.csv']);
-        unix(['cd ../data/anfis/split/holiday; mv test.csv ' ...
-              'bestTest.csv']);
-        unix(['cd ../data/anfis/split/holiday; mv checking.csv ' ...
-              'bestChecking.csv']);
-
+        unix(['mv ../data/anfis/split/holiday/*.csv ' ...
+              '../data/anfis/split/holiday/best\ data\']);
     end
-
-    % regenerate files
     unix('cd ../data/anfis; ./holiday.rb');
-    disp('Holidays data files re-generated');
-
 
     % workday Energy
-    disp( sprintf( ['Searching anfis network to estimate workday energy. Attempt #%d'], i ) );
+    disp( sprintf( ['\nWORKDAY ENERGY: Attempt #%d'], i ) );
     [ network, nMF, mse ] =  searchBestAnfis( trainEnergy, checkingEnergy, testEnergy );
     if mse < bestMseWorkEn
         bestMfWorkEn     = nMF;
@@ -61,16 +51,12 @@ for i = ITERATION
 
         % save also the file found!
         % FIXME: find a best method
-        unix(['cd ../data/anfis/split/workday; mv trainEnergy.csv ' ...
-              'bestTrainEnergy.csv']);
-        unix(['cd ../data/anfis/split/workday; mv testEnergy.csv ' ...
-              'bestTestEnergy.csv']);
-        unix(['cd ../data/anfis/split/workday; mv checkingEnergy.csv ' ...
-              'bestCheckingEnergy.csv']);
+        unix(['mv ../data/anfis/split/workday/*Energy.csv ' ...
+              '../data/anfis/split/workday/best\ data\']);
     end
 
     % workday InLight
-    disp( sprintf( ['Searching anfis network to estimate workday inlight. Attempt #%d'], i ) );
+    disp( sprintf( ['\nWORKDAY INLIGHT: Attempt #%d'], i ) );
     [ network, nMF, mse ] =  searchBestAnfis( trainInlight, checkingInlight, testInlight );
     if mse < bestMseWorkInl
         bestMfWorkInl  = nMF;
@@ -79,22 +65,14 @@ for i = ITERATION
 
         % save also the file found!
         % FIXME: find a best method
-        unix(['cd ../data/anfis/split/workday; mv trainInlight.csv ' ...
-              'bestTrainInlight.csv']);
-        unix(['cd ../data/anfis/split/workday; mv testInlight.csv ' ...
-              'bestTestInlight.csv']);
-        unix(['cd ../data/anfis/split/workday; mv checkingInlight.csv ' ...
-              'bestCheckingInlight.csv']);
+        unix(['mv ../data/anfis/split/workday/*Inlight.csv ' ...
+              '../data/anfis/split/workday/best\ data\']);
     end
-
-    % regenerate files
     unix('cd ../data/anfis; ./workday.rb');
-    disp('Workdays data files re-generated');
-
 
 end
 
-% PLOTS
+% PLOTS tests
 
 % holiday
 x = [1:length(test(:,1))];
