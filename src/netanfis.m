@@ -34,7 +34,7 @@ for i = ITERATION
         bestMfHoliday = nMF;
         bestMseHoliday = mse;
         bestNetworkHoliday = network;
-
+        bestNmfHoliday = nMF;
         % save also the file found!
         unix(['mv ../data/anfis/split/holiday/*.csv ' ...
               '../data/anfis/split/holiday/best\ data\']);
@@ -48,6 +48,7 @@ for i = ITERATION
         bestMfWorkEn     = nMF;
         bestMseWorkEn    = mse;
         bestNetworkWorkE = network;
+        bestNmfWorkEn = nMF;
 
         % save also the file found!
         % FIXME: find a best method
@@ -62,6 +63,7 @@ for i = ITERATION
         bestMfWorkInl  = nMF;
         bestMseWorkInl = mse;
         bestNetworkWorkInl = network;
+        bestNmfInlEn = nMF;
 
         % save also the file found!
         % FIXME: find a best method
