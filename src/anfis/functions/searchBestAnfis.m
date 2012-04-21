@@ -4,7 +4,7 @@
 %
 % Output: [network, train_errors, test_errors, check_errors]
 
-function [ network, bestTrainErrors, bestTestErrors, bestCheckErrors, nMF, bestTestMse ] = searchBestAnfis( trnData, chData, testData )
+function [ network, nMF, bestTestMse ] = searchBestAnfis( trnData, chData, testData )
 
     EPOCHES_VALUES = [30:35];
     GOAL_MSE       = 20;
@@ -17,9 +17,6 @@ function [ network, bestTrainErrors, bestTestErrors, bestCheckErrors, nMF, bestT
     test_inputs = testData(:,1:2);
     test_targets = testData(:,3);
 
-    bestTrainErrors = inf;
-    bestTestErrors  = inf;
-    bestCheckErrors = inf;
     bestTestMse = inf;
     network = 0;
     mse = inf;
@@ -46,10 +43,7 @@ function [ network, bestTrainErrors, bestTestErrors, bestCheckErrors, nMF, bestT
                 % tests the network
                 anfis_output = evalfis( test_inputs, out_fis );
 
-                %FIXME: use mse instead of normal error
-                errTest = gsubtract( test_targets, anfis_output );
-
-                mse = sqrt( sum( (test_targets(:)-anfis_output(:)).^2) / numel(test_targets) );
+                mse = sqrt( sum( (test_targets(:) - anfis_output(:)).^2) / numel(test_targets) );
 
                 disp(sprintf( ['Epoches #%d - Mfs: [%d %d] - MSE #%d'], epoch_n, i, j, mse ) );
 
@@ -60,16 +54,12 @@ function [ network, bestTrainErrors, bestTestErrors, bestCheckErrors, nMF, bestT
                     disp( 'best value found!' );
                     bestTestMse = mse;
                     network = out_fis;
-                    bestTestErrors = errTest;
-                    bestTrainErrors = error;
-                    bestCheckErrors = chkErr;
                     nMF = numMFs;
 
                     if mse <= GOAL_MSE
                         return
                     end
                 end
-
 
             end
 
