@@ -6,9 +6,9 @@
 
 function [ network, nMF, bestTestMse ] = searchBestAnfis( trnData, chData, testData )
 
-    EPOCHES_VALUES = [30:35];
+    EPOCHES_VALUES = [30:10:80];
     GOAL_MSE       = 20;
-    MF_VALUES      = [3:7];
+    MF_VALUES      = [3:6];
     MF_INIT        = [ MF_VALUES(1), MF_VALUES(1) ];
 
     numMFs  = MF_INIT;
