@@ -18,14 +18,14 @@ load '../data/anfis/split/workday/checkingInlight.csv';
 load '../data/anfis/split/workday/testInlight.csv';
 
 
-ITERATION = [1:5];
+ITERATIONS = [1:5];
 
 bestMseHoliday = inf;
 bestMseWorkInl = inf;
-bestMseWorkEn  = inf;
+bestMseWorkE  = inf;
 
 
-for i = ITERATION
+for i = ITERATIONS
 
     % holiday Inlight
     disp( sprintf( ['\nHOLIDAY INLIGHT: Attempt #%d'], i ) );
@@ -44,9 +44,9 @@ for i = ITERATION
     % workday Energy
     disp( sprintf( ['\nWORKDAY ENERGY: Attempt #%d'], i ) );
     [ network, nMF, mse ] =  searchBestAnfis( trainEnergy, checkingEnergy, testEnergy );
-    if mse < bestMseWorkEn
+    if mse < bestMseWorkE
         bestMfWorkEn     = nMF;
-        bestMseWorkEn    = mse;
+        bestMseWorkE    = mse;
         bestNetworkWorkE = network;
         bestNmfWorkEn = nMF;
 
@@ -75,38 +75,6 @@ for i = ITERATION
 end
 
 % PLOTS tests
-
-% holiday
-x = [1:length(test(:,1))];
-str = sprintf('Holiday inlight Mse: %f',bestMseHoliday);
-figure
-plot(x,test(:,3),'o',x,evalfis( test(:,1:2), bestNetworkHoliday ),'x');
-xlabel('steps');
-ylabel('outputs');
-title(str);
-legend('targets','outputs');
-bestMfHoliday
-
-
-%workday energy
-x = [1:length(testEnergy(:,1))];
-str = sprintf('Workday Energy Mse: %f',bestMseWorkEn);
-figure
-plot(x,testEnergy(:,3),'o',x,evalfis( testEnergy(:,1:2), bestNetworkWorkE ),'x');
-xlabel('steps');
-ylabel('outputs');
-title(str);
-legend('targets','outputs');
-bestMfWorkEn
-
-
-%workday Inlight
-x = [1:length(testInlight(:,1))];
-str = sprintf('Workday Inlight Mse: %f',bestMseWorkInl);
-figure
-plot(x,testInlight(:,3),'o',x,evalfis( testInlight(:,1:2), bestNetworkWorkInl ),'x');
-xlabel('steps');
-ylabel('outputs');
-title(str);
-legend('targets','outputs');
-bestMfWorkInl
+testplot( bestNetworkHoliday, test, sprintf('Holiday inlight Mse: %f',bestMseHoliday));
+testplot( bestNetworkWorkE, testEnergy, sprintf('Workday Energy Mse: %f',bestMseWorkE));
+testplot( bestNetworkWorkInl, testInlight, sprintf('Workday Inlight Mse: %f',bestMseWorkInl));
