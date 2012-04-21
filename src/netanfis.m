@@ -1,4 +1,9 @@
 addpath('anfis/functions');
+
+% generates the necessary files
+unix('cd ../data/anfis; ./holiday.rb');
+unix('cd ../data/anfis; ./workday.rb');
+
 load '../data/anfis/split/holiday/train.csv';
 load '../data/anfis/split/holiday/checking.csv';
 load '../data/anfis/split/holiday/test.csv';
@@ -24,9 +29,9 @@ testErrorsWorkEn  = inf;
 for i = ITERATION
 
     % holiday Inlight
-     disp( sprintf( ['Searching anfis network to estimate holiday inlight. Attempt #%d'], i ) );
+    disp( sprintf( ['Searching anfis network to estimate holiday inlight. Attempt #%d'], i ) );
     [ networkHoliday, trainErrors, testErrors, checkErrors, nMF, mse ...
-    ] =  searchBestAnfis( trainAnfis, checkingAnfis, testAnfis );
+    ] =  searchBestAnfis( train, checking, test );
     if mse < bestMseHoliday
         bestMfHoliday = nMF;
         bestMseHoliday = mse;
@@ -42,13 +47,15 @@ for i = ITERATION
 
     end
 
+    % regenerate files
     unix('cd ../data/anfis; ./holiday.rb');
     disp('Holidays data files re-generated');
+
 
     % workday Energy
     disp( sprintf( ['Searching anfis network to estimate workday energy. Attempt #%d'], i ) );
     [ networkWorkE, trainErrors, testErrors, checkErrors, nMF, mse ...
-    ] =  searchBestAnfis( trainAnfisEnergy, checkingAnfisEnergy, testAnfisEnergy );
+    ] =  searchBestAnfis( trainEnergy, checkingEnergy, testEnergy );
     if mse < bestMseWorkEn
         bestMfWorkEn     = nMF;
         bestMseWorkEn    = mse;
@@ -65,7 +72,7 @@ for i = ITERATION
     % workday InLight
     disp( sprintf( ['Searching anfis network to estimate workday inlight. Attempt #%d'], i ) );
     [ networkWorkInl, trainErrors, testErrors, checkErrors, nMF, mse ...
-    ] =  searchBestAnfis( trainAnfisInlight, checkingAnfisInlight, testAnfisInlight );
+    ] =  searchBestAnfis( trainInlight, checkingInlight, testInlight );
     if mse < bestMseWorkInl
         bestMfWorkInl     = nMF;
         bestMseWorkInl    = mse;
@@ -79,8 +86,10 @@ for i = ITERATION
               'bestCheckingInlight.csv']);
     end
 
+    % regenerate files
     unix('cd ../data/anfis; ./workday.rb');
     disp('Workdays data files re-generated');
+
 
 end
 
