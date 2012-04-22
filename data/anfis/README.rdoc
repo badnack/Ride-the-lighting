@@ -1,13 +1,18 @@
-Script and directories contents
-===============================
+= Script and directories contents
+
+== Scripts
 
 * holiday.rb generates a file containing most representative data for the 
-  holidays. File generated is:
-  * holiday_inlight.csv which report inlight data
+  holidays. File generated are stored in holiday directory.
 
-* anfisDivisionData.rb split the input/output files in 3 different csv file:
-  * checkingAnfis.csv: provides the necessary data to check the anfis network
-  * testAnfis.csv: provides the necessary data to test the anfis network
-  * trainAnfis: provides the necessary data to train the anfis network
+* workday.rb generates a file containing most representative data for the 
+  work days. File generated are stored in workday directory.
+
+
+== Directories
+
+* holiday contains holidays data which has been generated
+* workday contains work days data which has been generated
+  
 
   

@@ -1,0 +1,9 @@
+= Files and Directories contents
+
+== Files
+
+* These files contain samples for anfis.
+
+== Directories
+
+* best data contains best data found by netanfis algorhitm 
