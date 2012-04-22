@@ -5,17 +5,17 @@ unix('cd ../data/anfis; ./holiday.rb');
 unix('cd ../data/anfis; ./workday.rb');
 
 % loads necessary data files
-load '../data/anfis/split/holiday/train.csv';
-load '../data/anfis/split/holiday/checking.csv';
-load '../data/anfis/split/holiday/test.csv';
+load '../data/anfis/holiday/train.csv';
+load '../data/anfis/holiday/checking.csv';
+load '../data/anfis/holiday/test.csv';
 
-load '../data/anfis/split/workday/trainEnergy.csv';
-load '../data/anfis/split/workday/checkingEnergy.csv';
-load '../data/anfis/split/workday/testEnergy.csv';
+load '../data/anfis/workday/trainEnergy.csv';
+load '../data/anfis/workday/checkingEnergy.csv';
+load '../data/anfis/workday/testEnergy.csv';
 
-load '../data/anfis/split/workday/trainInlight.csv';
-load '../data/anfis/split/workday/checkingInlight.csv';
-load '../data/anfis/split/workday/testInlight.csv';
+load '../data/anfis/workday/trainInlight.csv';
+load '../data/anfis/workday/checkingInlight.csv';
+load '../data/anfis/workday/testInlight.csv';
 
 
 ITERATIONS = [1:100];
@@ -36,8 +36,8 @@ for i = ITERATIONS
         bestNetworkHoliday = network;
         bestNmfHoliday = nMF;
         % save also the file found!
-        unix(['mv ../data/anfis/split/holiday/*.csv ' ...
-              '../data/anfis/split/holiday/best\ data\']);
+        unix(['mv ../data/anfis/holiday/*.csv ' ...
+              '../data/anfis/holiday/best\ data\']);
     end
     unix('cd ../data/anfis; ./holiday.rb');
 
@@ -52,8 +52,8 @@ for i = ITERATIONS
 
         % save also the file found!
         % FIXME: find a best method
-        unix(['mv ../data/anfis/split/workday/*Energy.csv ' ...
-              '../data/anfis/split/workday/best\ data\']);
+        unix(['mv ../data/anfis/workday/*Energy.csv ' ...
+              '../data/anfis/workday/best\ data\']);
     end
 
     % workday InLight
@@ -67,8 +67,8 @@ for i = ITERATIONS
 
         % save also the file found!
         % FIXME: find a best method
-        unix(['mv ../data/anfis/split/workday/*Inlight.csv ' ...
-              '../data/anfis/split/workday/best\ data\']);
+        unix(['mv ../data/anfis/workday/*Inlight.csv ' ...
+              '../data/anfis/workday/best\ data\']);
     end
     unix('cd ../data/anfis; ./workday.rb');
 
