@@ -30,12 +30,14 @@ OUT_LIGHT_MEDIUM = 500
 OUT_LIGHT_HIGH = 800
 OUT_LIGHT_VERY_HIGH = 1000
 
-ENERGY_LOW = 125
-ENERGY_MEDIUM = 375
-ENERGY_HIGH = 500
+ENERGY_LOW = 75
+ENERGY_MEDIUM = 225
+ENERGY_HIGH = 375
+ENERGY_VERY_HIGH = 500
 
-IN_LIGHT_LOW = 375
-IN_LIGHT_MEDIUM = 975
+IN_LIGHT_VERY_LOW = 150
+IN_LIGHT_LOW = 550
+IN_LIGHT_MEDIUM = 950
 IN_LIGHT_HIGH = 1300
 
 
@@ -93,12 +95,18 @@ CSV.foreach( datapath ) do |row|
     when ENERGY_MEDIUM..ENERGY_HIGH
     tmp[:energy] = 'alto'
 
+    when ENERGY_HIGH..ENERGY_VERY_HIGH
+    tmp[:energy] = 'molto alto'
+  
     else
     puts "Error!"
   end
 
   case row[IN_LIGHT].to_f
-    when 0..IN_LIGHT_LOW
+    when 0..IN_LIGHT_VERY_LOW
+    tmp[:in_light] = 'molto bassa'
+
+    when IN_LIGHT_VERY_LOW..IN_LIGHT_LOW
     tmp[:in_light] = 'bassa'
 
     when IN_LIGHT_LOW..IN_LIGHT_MEDIUM

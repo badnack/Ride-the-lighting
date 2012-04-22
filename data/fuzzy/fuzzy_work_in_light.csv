@@ -1,29 +1,34 @@
-orario;irraggiamento;luminosità;;;basso;medio;alto
-mattina;medio;bassa;10;;0,1282051282;;
-mattina;medio;media;61;;;0,7820512821;
-mattina;alto;media;49;;;0,8596491228;
-mattina;molto alto;media;20;;;0,6451612903;
-mattina;molto alto;bassa;8;;0,2580645161;;
-mattina;basso;bassa;27;;0,6136363636;;
-mattina;basso;media;17;;;0,3863636364;
-mattina;molto alto;alta;3;;;;0,0967741935
-mattina;alto;bassa;3;;0,0526315789;;
-mattina;medio;alta;7;;;;0,0897435897
-mattina;alto;alta;5;;;;0,0877192982
-notte;basso;bassa;207;;1;;
-pome;molto alto;bassa;37;;0,5;;
-pome;alto;bassa;38;;0,6785714286;;
-pome;medio;bassa;21;;0,3620689655;;
-pome;molto alto;media;37;;;0,5;
-pome;medio;media;32;;;0,5517241379;
-pome;alto;media;13;;;0,2321428571;
-pome;basso;bassa;12;;0,5454545455;;
-pome;medio;alta;5;;;;0,0862068966
-pome;basso;media;10;;;0,4545454545;
-pome;alto;alta;5;;;;0,0892857143
-prima mattina;basso;bassa;124;;0,9841269841;;
-prima mattina;basso;media;2;;;0,0158730159;
-sera;medio;bassa;25;;0,9259259259;;
-sera;basso;bassa;222;;0,9866666667;;
-sera;medio;media;2;;;0,0740740741;
-sera;basso;media;3;;;0,0133333333;
+Orario;Irraggiamento;Luminosità;Count;Molto bassa;Bassa;Media;Alta
+mattina;basso;bassa;29;0;6363636364;0;0
+mattina;molto alto;alta;3;0;0;0;967741935
+mattina;medio;bassa;42;0;5384615385;0;0
+mattina;medio;alta;8;0;0;0;1025641026
+mattina;alto;alta;6;0;0;0;1052631579
+mattina;medio;media;28;0;0;358974359;0
+mattina;basso;media;9;0;0;2045454545;0
+mattina;basso;molto bassa;6;1363636364;0;0;0
+mattina;alto;bassa;32;0;5614035088;0;0
+mattina;alto;media;19;0;0;3333333333;0
+mattina;molto alto;media;11;0;0;3548387097;0
+mattina;molto alto;bassa;17;0;5483870968;0;0
+notte;basso;molto bassa;207;1;0;0;0
+pome;alto;molto bassa;2;357142857;0;0;0
+pome;medio;alta;5;0;0;0;862068966
+pome;medio;molto bassa;1;172413793;0;0;0
+pome;alto;media;6;0;0;1071428571;0
+pome;basso;bassa;16;0;7272727273;0;0
+pome;basso;media;3;0;0;1363636364;0
+pome;molto alto;bassa;59;0;7866666667;0;0
+pome;basso;molto bassa;3;1363636364;0;0;0
+pome;medio;media;20;0;0;3448275862;0
+pome;medio;bassa;32;0;5517241379;0;0
+pome;alto;alta;5;0;0;0;892857143
+pome;molto alto;media;14;0;0;1891891892;0
+pome;molto alto;alta;1;0;0;0;135135135
+pome;alto;bassa;43;0;7678571429;0;0
+prima mattina;basso;molto bassa;101;8015873016;0;0;0
+prima mattina;basso;bassa;25;0;1984126984;0;0
+sera;medio;bassa;19;0;7037037037;0;0
+sera;basso;bassa;23;0;1022222222;0;0
+sera;medio;molto bassa;8;2962962963;0;0;0
+sera;basso;molto bassa;202;8977777778;0;0;0

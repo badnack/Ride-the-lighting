@@ -1,29 +1,39 @@
-orario;irraggiamento;energia consumata;;;basso;medio;alto
-mattina;medio;medio;29;;;0,3717948718;
-mattina;medio;basso;49;;0,6282051282;;
-mattina;alto;medio;25;;;0,4385964912;
-mattina;molto alto;medio;18;;;0,5806451613;
-mattina;basso;medio;18;;;0,4090909091;
-mattina;basso;basso;26;;0,5909090909;;
-mattina;alto;basso;32;;0,5614035088;;
-mattina;molto alto;basso;13;;0,4193548387;;
-notte;basso;basso;207;;1;;
-pome;molto alto;medio;38;;;0,5135135135;
-pome;alto;medio;30;;;0,5357142857;
-pome;medio;medio;31;;;0,5344827586;
-pome;molto alto;basso;35;;0,472972973;;
-pome;medio;basso;22;;0,3793103448;;
-pome;alto;basso;24;;0,4285714286;;
-pome;basso;basso;9;;0,4090909091;;
-pome;basso;medio;13;;;0,5909090909;
-pome;medio;alto;5;;;;0,0862068966
-pome;alto;alto;2;;;;0,0357142857
-pome;molto alto;alto;1;;;;0,0135135135
-prima mattina;basso;basso;111;;0,880952381;;
-prima mattina;basso;medio;11;;;0,0873015873;
-prima mattina;basso;alto;4;;;;0,0317460317
-sera;medio;medio;13;;;0,4814814815;
-sera;basso;basso;209;;0,9288888889;;
-sera;medio;basso;12;;0,4444444444;;
-sera;basso;medio;16;;;0,0711111111;
-sera;medio;alto;2;;;;0,0740740741
+Orario;Irraggiamento;Energia;Count;;Basso;Medio;Alto;Molto alto
+mattina;basso;alto;10;;0;0;0,2272727273;0
+mattina;alto;alto;2;;0;0;0,0350877193;0
+mattina;basso;basso;18;;0,4090909091;0;0;0
+mattina;molto alto;medio;24;;0;0,7741935484;0;0
+mattina;basso;medio;16;;0;0,3636363636;0;0
+mattina;alto;medio;32;;0;0,5614035088;0;0
+mattina;alto;basso;23;;0,4035087719;0;0;0
+mattina;medio;medio;23;;0;0,2948717949;0;0
+mattina;molto alto;basso;3;;0,0967741935;0;0;0
+mattina;molto alto;alto;4;;0;0;0,1290322581;0
+mattina;medio;alto;15;;0;0;0,1923076923;0
+mattina;medio;basso;40;;0,5128205128;0;0;0
+notte;basso;basso;207;;1;0;0;0
+pome;basso;basso;8;;0,3636363636;0;0;0
+pome;molto alto;molto alto;1;;0;0;0;0,0135135135
+pome;medio;molto alto;5;;0;0;0;0,0862068966
+pome;alto;molto alto;2;;0;0;0;0,0357142857
+pome;basso;alto;6;;0;0;0,2727272727;0
+pome;alto;basso;12;;0,2142857143;0;0;0
+pome;medio;medio;32;;0;0,5517241379;0;0
+pome;basso;medio;8;;0;0,3636363636;0;0
+pome;medio;basso;13;;0,224137931;0;0;0
+pome;alto;alto;3;;0;0;0;0,0535714286
+pome;molto alto;basso;14;;0,1891891892;0;0;0
+pome;alto;medio;39;;0;0;0,6964285714;0
+pome;medio;alto;8;;0;0;0,1379310345;0
+pome;molto alto;medio;59;;0;0,7972972973;0;0
+prima mattina;basso;alto;9;;0;0;0,0714285714;0
+prima mattina;basso;basso;110;;0,9444444444;0;0;0
+prima mattina;basso;medio;3;;0;0,0238095238;0;0
+prima mattina;basso;molto alto;4;;0;0;0;0,0317460317
+sera;basso;basso;201;;0,8933333333;0;0;0
+sera;basso;alto;4;;0;0;0,0177777778;0
+sera;medio;medio;15;;0;0,5555555556;0;0
+sera;medio;basso;9;;0,3333333333;0;0;0
+sera;medio;alto;1;;0;0;0,037037037;0
+sera;basso;medio;20;;0;0,1288888889;0;0
+sera;medio;molto alto;2;;0;0;0;0,0740740741

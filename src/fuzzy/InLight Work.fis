@@ -4,7 +4,7 @@ Type='mamdani'
 Version=2.0
 NumInputs=2
 NumOutputs=1
-NumRules=9
+NumRules=6
 AndMethod='min'
 OrMethod='max'
 ImpMethod='min'
@@ -32,19 +32,17 @@ MF4='alto':'trapmf',[400 600 700 900]
 
 [Output1]
 Name='luminosita'
-Range=[0 500]
-NumMFs=3
-MF1='bassa':'trimf',[0 0 200]
-MF2='media':'trimf',[50 250 450]
-MF3='alta':'trimf',[296 500 500]
+Range=[0 1300]
+NumMFs=4
+MF1='molto-bassa':'trimf',[0 0 200]
+MF2='bassa':'trimf',[100 350 600]
+MF3='alta':'trimf',[900 1300 1300]
+MF4='media':'trimf',[500 750 1000]
 
 [Rules]
 1 0, 1 (1) : 1
 2 0, 1 (1) : 1
-3 1, 1 (1) : 1
-3 -1, 2 (1) : 1
-4 1, 1 (1) : 1
-4 2, 2 (1) : 1
-4 4, 1 (1) : 1
-4 3, 2 (1) : 1
-5 0, 1 (1) : 1
+3 0, 2 (1) : 1
+4 0, 2 (1) : 1
+5 2, 2 (1) : 1
+5 -2, 1 (1) : 1

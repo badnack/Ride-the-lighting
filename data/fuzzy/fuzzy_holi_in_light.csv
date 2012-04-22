@@ -1,28 +1,32 @@
-orario;irraggiamento;luminosità;;;basso;medio;alto
-mattina;medio;bassa;3;;0,0769230769;;
-mattina;medio;media;32;;;0,8205128205;
-mattina;alto;media;20;;;0,7407407407;
-mattina;alto;bassa;4;;0,1481481481;;
-mattina;molto alto;media;12;;;0,5;
-mattina;molto alto;bassa;12;;0,5;;
-mattina;basso;bassa;9;;0,45;;
-mattina;medio;alta;4;;;;0,1025641026
-mattina;basso;media;11;;;0,55;
-mattina;alto;alta;3;;;;0,1111111111
-notte;basso;bassa;110;;1;;
-pome;molto alto;bassa;34;;0,7555555556;;
-pome;alto;bassa;24;;0,8275862069;;
-pome;medio;bassa;10;;0,4347826087;;
-pome;medio;media;12;;;0,5217391304;
-pome;medio;alta;1;;;;0,0434782609
-pome;molto alto;alta;2;;;;0,0444444444
-pome;basso;media;7;;;0,5384615385;
-pome;molto alto;media;9;;;0,2;
-pome;alto;media;5;;;0,1724137931;
-pome;basso;bassa;6;;0,4615384615;;
-prima mattina;basso;bassa;65;;0,9848484848;;
-prima mattina;basso;media;1;;;0,0151515152;
-sera;medio;bassa;14;;0,9333333333;;
-sera;basso;bassa;116;;0,9914529915;;
-sera;medio;media;1;;;0,0666666667;
-sera;basso;media;1;;;0,0085470085;
+Orario;Irraggiamento;Luminosità;Count;Molto bassa;Bassa;Media;Alta
+mattina;basso;bassa;11;0;0,55;0;0
+mattina;medio;bassa;20;0;0,5128205128;0;0
+mattina;medio;alta;4;0;0;0;0,1025641026
+mattina;alto;alta;3;0;0;0;0,1111111111
+mattina;basso;media;5;0;0;0,25;0
+mattina;medio;media;15;0;0;0,3846153846;0
+mattina;basso;molto bassa;4;0,2;0;0;0
+mattina;alto;bassa;20;0;0,7407407407;0;0
+mattina;alto;media;4;0;0;0,1481481481;0
+mattina;molto alto;media;2;0;0;0,0833333333;0
+mattina;molto alto;bassa;22;0;0,9166666667;0;0
+notte;basso;molto bassa;110;1;0;0;0
+pome;alto;molto bassa;2;0,0689655172;0;0;0
+pome;medio;molto bassa;2;0,0869565217;0;0;0
+pome;medio;alta;1;0;0;0;0,0434782609
+pome;alto;media;3;0;0;0,1034482759;0
+pome;basso;bassa;8;0;0,6153846154;0;0
+pome;basso;media;1;0;0;0,0769230769;0
+pome;molto alto;bassa;40;0;0,8888888889;0;0
+pome;basso;molto bassa;4;0,3076923077;0;0;0
+pome;medio;media;5;0;0;0,2173913043;0
+pome;medio;bassa;15;0;0,652173913;0;0
+pome;molto alto;media;3;0;0;0,0666666667;0
+pome;molto alto;alta;2;0;0;0;0,0444444444
+pome;alto;bassa;24;0;0,8275862069;0;0
+prima mattina;basso;molto bassa;48;0,7272727273;0;0;0
+prima mattina;basso;bassa;18;0;0,2727272727;0;0
+sera;medio;bassa;10;0;0,6666666667;0;0
+sera;basso;bassa;10;0;0,0854700855;0;0
+sera;medio;molto bassa;5;0,3333333333;0;0;0
+sera;basso;molto bassa;107;0,9145299145;0;0;0
