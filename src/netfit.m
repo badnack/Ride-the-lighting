@@ -2,6 +2,10 @@
 % Neural network fitting
 
 addpath('./neural network/functions');
+
+% generates necessary data
+unix('cd ../data; ./conform.rb');
+
 load '../data/inputAll.csv';
 load '../data/targetAll.csv';
 

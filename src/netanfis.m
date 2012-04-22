@@ -18,7 +18,7 @@ load '../data/anfis/workday/checkingInlight.csv';
 load '../data/anfis/workday/testInlight.csv';
 
 
-ITERATIONS = [1:100];
+ITERATIONS = [1:20];
 
 bestMseHoliday = inf;
 bestMseWorkInl = inf;

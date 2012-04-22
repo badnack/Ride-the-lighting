@@ -2,10 +2,17 @@
 % Time Series model
 
 addpath('./time series/functions');
-load '../data/inputAll.csv';
-load '../data/targetAll.csv';
+unix('cd ../data/time\ series; ./energy.rb');
+unix('cd ../data/time\ series; ./inlight.rb');
 
-[ net, train, outputs, errors, inputs, targets ] = searchBestTimeSeries( inputAll, targetAll );
+load '../data/time series/inputEnergy.csv';
+load '../data/time series/targetEnergy.csv';
+
+load '../data/time series/inputInlight.csv';
+load '../data/time series/targetInlight.csv';
+
+
+[ net, train, outputs, errors, inputs, targets ] = searchBestTimeSeries( inputInlight, targetInlight );
 
 % View the Network
 view(net)
@@ -18,3 +25,5 @@ figure, plotregression(targets,outputs)
 figure, plotresponse(targets,outputs)
 figure, ploterrcorr(errors)
 figure, plotinerrcorr(inputs,errors)
+
+
