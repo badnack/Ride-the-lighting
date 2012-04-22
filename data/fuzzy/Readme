@@ -1,0 +1,9 @@
+"Per provare questa merda" (cit) si deve:
+     - importare nel workspace di matlab i modellu fuzzy .fis
+     - testarli tramite la funzione evalfis() con in ingresso una matrice di input [hour,out_light];
+       l'output sarà un vettore con i corrispettivi valori di energy/in_light
+     - verificare il risultato fuzzificando sia gli output originari sia quelli restituiti dalla funzione;
+       infine controllare che questi coincidano.
+
+
+**Attenzione nel passare i valori corretti per ogni modello dato che sono divisi sia per tipo di output sia per tipo di giorno feriale/festivo
