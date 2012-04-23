@@ -48,15 +48,15 @@ function [ network, training, outputs, errors ] = searchBestFitting( inputs, tar
             % Test the Network
             out = net( inputs );
             err = gsubtract( targets, out );
-            
-            
+
+
             testMse = perform(net,targets(:,tr.testInd),out(:,tr.testInd));
-            valMse = perform(net,targets(:,tr.trainInd),out(:,tr.trainInd));
+            valMse = perform(net,targets(:,tr.valInd),out(:,tr.valInd));
 
             valReg = regression(targets(:,tr.valInd), out(:,tr.valInd),'one');
             testReg = regression(targets(:,tr.testInd),out(:,tr.testInd),'one');
- 
-            
+
+
 
             if ( valMse < bestValMse && testMse < ...
                  bestTestMse && testReg > ...
