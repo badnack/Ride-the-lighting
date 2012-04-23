@@ -12,7 +12,7 @@ load '../data/time series/inputInlight.csv';
 load '../data/time series/targetInlight.csv';
 
 
-[ net, train, outputs, errors, inputs, targets ] = searchBestTimeSeries( inputInlight, targetInlight );
+[ net, train, outputs, errors, inputs, targets ] = searchBestTimeSeries( inputEnergy, targetEnergy );
 
 % View the Network
 view(net)
@@ -25,5 +25,3 @@ figure, plotregression(targets,outputs)
 figure, plotresponse(targets,outputs)
 figure, ploterrcorr(errors)
 figure, plotinerrcorr(inputs,errors)
-
-

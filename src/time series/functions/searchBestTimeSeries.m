@@ -5,18 +5,33 @@
 % Output: [network, training, outputs, errors, inputs, targets]
 
 function [ network, training, outputs, errors, inputs, targets ] = searchBestTimeSeries( inputs, targets )
+
+    GOAL_MSE        = 1000;
+    GOAL_REGRESSION = 0.99;
+
     DELAYS = 2:8;
-    HIDDEN_LAYER_SIZES = 20:25;
+    HIDDEN_LAYER_SIZES = 10:25;
 
-    TRAIN_RATIO     = 0.90;
-    VALUATION_RATIO = 0.05;
-    TEST_RATIO      = 0.05;
+    TRAIN_RATIO      = 0.7;
+    VALIDATION_RATIO = 0.15;
+    TEST_RATIO       = 0.15;
 
-    RETRAIN_ATTEMPTS = 10;
+    RETRAIN_ATTEMPTS = 20;
 
     % Prepare data
     inputSeries = tonndata( inputs, false, false );
     targetSeries = tonndata( targets, false, false );
+
+    bestTestReg   = 0;
+    bestValReg    = 0;
+    bestValMse    =  inf;
+    bestTestMse   =  inf;
+
+    % necessary assignements whether a network isn't found
+    network           = 0;
+    training          = 0 ;
+    outputs           = 0;
+    errors            = inf;
 
     for i = HIDDEN_LAYER_SIZES
         for d = DELAYS
@@ -27,13 +42,13 @@ function [ network, training, outputs, errors, inputs, targets ] = searchBestTim
             hiddenLayerSize = i;
             net = narxnet( inputDelays, feedbackDelays, hiddenLayerSize );
 
-            [inputs,inputStates,layerStates,targets] = preparets(net,inputSeries,{},targetSeries);
+            [ inputs, inputStates, layerStates, targets ] = preparets( net, inputSeries, {}, targetSeries );
 
             net.divideFcn = 'dividerand';  % Divide data randomly
             net.divideMode = 'value';  % Divide up every value
-            net.divideParam.trainRatio = 70/100;
-            net.divideParam.valRatio = 15/100;
-            net.divideParam.testRatio = 15/100;
+            net.divideParam.trainRatio = TRAIN_RATIO;
+            net.divideParam.valRatio = VALIDATION_RATIO;
+            net.divideParam.testRatio = TEST_RATIO;
 
             net.trainFcn = 'trainlm';  % Levenberg-Marquardt
             net.performFcn = 'mse';  % Mean squared error
@@ -49,32 +64,50 @@ function [ network, training, outputs, errors, inputs, targets ] = searchBestTim
                 net = init( net );
 
                 % Train the Network
-                [net,tr] = train(net,inputs,targets,inputStates,layerStates);
+                [ net, tr ] = train( net,inputs,targets, inputStates,layerStates );
 
                 % Test the Network
-                out = net(inputs,inputStates,layerStates);
-                err = gsubtract(targets,out);
-                mse = perform(net,targets,out);
+                out = net( inputs,inputStates,layerStates );
+                err = gsubtract( targets, out );
+                mse = perform( net, targets, out );
+
+
+                xi = nnfast.getelements( inputs, 1 );
+                ei = nnfast.getelements( err, 1 );
+                errcorr = checkCorr( ei, ei, 1 );
+                inecorr = checkCorr( xi, ei, 1 );
 
                 % Recalculate Training, Validation and Test Performance
-                trainTargets = gmultiply(targets,tr.trainMask);
-                valTargets = gmultiply(targets,tr.valMask);
-                testTargets = gmultiply(targets,tr.testMask);
-                trainPerformance = perform(net,trainTargets,out);
-                valPerformance = perform(net,valTargets,out);
-                testPerformance = perform(net,testTargets,out);
+                testMse = perform( net,targets( :, tr.testInd),out ( :, tr.testInd ) );
+                valMse = perform( net,targets( :, tr.valInd ),out( :,tr.valInd ) );
+                valReg = regression( targets( :, tr.valInd ), out( :,tr.valInd ), 'one' );
+                testReg = regression( targets( :, tr.testInd ),out( :,tr.testInd ), 'one' );
 
-                network  = net;
-                errors   = err;
-                outputs  = out;
-                training = tr;
 
-                errcorr = checkCorr( errors, errors, 1.2 )
-                inecorr = checkCorr( inputs, errors, 15 ) % FIXME: tollerance too high!
+                if ( valMse <= bestValMse && testMse <= ...
+                     bestTestMse && testReg >= ...
+                     bestTestReg && valReg >= bestValReg && inecorr && ...
+                     errcorr )
 
-                if inecorr && errcorr
                     disp( 'Best net found!' );
+                    bestTestMse = testMse
+                    bestValMse = valMse;
+                    bestTestReg = testReg
+                    bestValReg = valReg;
+                    network  = net;
+                    training = tr;
+                    outputs  = out;
+                    errors   = err;
+                    
                     return
+                    
+                    % Goal reached
+                    if ( testMse <= GOAL_MSE  && testReg >= GOAL_REGRESSION )
+                        disp( 'Goal reached!' );
+                        return
+                    end
+
+
                 end
             end  % end ATTEMPTS for
         end  % end DELAYS for
@@ -85,25 +118,30 @@ end
 % Check error autocorrelation
 % Return TRUE if correlation values aren't too bad
 function valid = checkCorr( a, b, tollerance )
+    BAD_STEP_TOLLERANCE = 1;
     STEPS = 20;
-    size = min( length(a), length(b) );
-    a = a(1,1:size);
-    b = b(1,1:size);
-    corr = nncorr( a, b, STEPS, 'unbiased' );
-    corr = corr{1,1};
-    corr_zero = nncorr( a, b, 0, 'unbiased' );
-    corr_zero = corr_zero{1,1};
-    maxlagi = min( STEPS, numtimesteps(a) - 1 );
-    corr_limit = corr( maxlagi+1 )*2 / sqrt( length(a) );
+    corr_limit = -1;
 
+    maxlagi = min( STEPS, numtimesteps( b ) - 1 );
+    corr = nncorr( a, b, maxlagi, 'unbiased' );
+    corr = corr{1,1};
+
+
+    if cell2mat( a ) == cell2mat( b ) %autocorrelation!!!
+         corr_limit = corr( maxlagi + 1 ) *2 / sqrt( length(a) );
+    else
+        corr_limit = std( cell2mat( a ) ) * std( cell2mat( b ) ) * 2 / sqrt( length( b ) );
+
+    end
     bad_steps = 0;
     for c = corr
-        if abs(c) > abs(corr_limit)*tollerance
+        if abs( c ) > abs( corr_limit ) * tollerance
             bad_steps = bad_steps + 1;
         end
     end
     valid = true;
-    if bad_steps > 1
+
+    if bad_steps > BAD_STEP_TOLLERANCE
         valid = false;
     end
 end
