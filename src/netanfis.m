@@ -1,54 +1,45 @@
 addpath('anfis/functions');
 
 % generates the necessary files
-unix('cd ../data/anfis; ./holiday.rb');
-unix('cd ../data/anfis; ./workday.rb');
+setNewAnfisValues;
 
-% loads necessary data files
-load '../data/anfis/holiday/train.csv';
-load '../data/anfis/holiday/checking.csv';
-load '../data/anfis/holiday/test.csv';
-
-load '../data/anfis/workday/trainEnergy.csv';
-load '../data/anfis/workday/checkingEnergy.csv';
-load '../data/anfis/workday/testEnergy.csv';
-
-load '../data/anfis/workday/trainInlight.csv';
-load '../data/anfis/workday/checkingInlight.csv';
-load '../data/anfis/workday/testInlight.csv';
-
-
-ITERATIONS = [1:5];
+ITERATIONS = [1:50];
 
 bestMseHoliday = inf;
 bestMseWorkInl = inf;
 bestMseWorkE  = inf;
 
+bestErrHoliday = inf;
+bestErrWorkInl = inf;
+bestErrWorkE   = inf;
 
 for i = ITERATIONS
 
     % holiday Inlight
     disp( sprintf( ['\nHOLIDAY INLIGHT: Attempt #%d'], i ) );
-    [ network, nMF, mse ] =  searchBestAnfis( train, checking, test );
+    [ network, nMF, mse, err ] =  searchBestAnfis( train, checking, test );
     if mse < bestMseHoliday
         disp( sprintf( ['Best values found - MSE #%d'], mse ) );
         bestMfHoliday = nMF;
         bestMseHoliday = mse;
+        bestErrHoliday = err;
         bestNetworkHoliday = network;
         bestNmfHoliday = nMF;
         % save also the file found!
         unix(['mv ../data/anfis/holiday/*.csv ' ...
               '../data/anfis/holiday/best\ data\']);
     end
-    unix('cd ../data/anfis; ./holiday.rb');
+    
+    disp( sprintf( ['MSE #%d'], bestMseHoliday ) );
 
     % workday Energy
     disp( sprintf( ['\nWORKDAY ENERGY: Attempt #%d'], i ) );
-    [ network, nMF, mse ] =  searchBestAnfis( trainEnergy, checkingEnergy, testEnergy );
+    [ network, nMF, mse,err ] =  searchBestAnfis( trainEnergy, checkingEnergy, testEnergy );
     if mse < bestMseWorkE
         disp( sprintf( ['Best values found - MSE #%d'], mse ) );
         bestMfWorkEn     = nMF;
-        bestMseWorkE    = mse;
+        bestMseWorkE     = mse;
+        bestErrWorkE     = err;
         bestNetworkWorkE = network;
         bestNmfWorkEn = nMF;
 
@@ -57,14 +48,16 @@ for i = ITERATIONS
         unix(['mv ../data/anfis/workday/*Energy.csv ' ...
               '../data/anfis/workday/best\ data\']);
     end
+    disp( sprintf( ['MSE #%d'], bestMseWorkE ) );
 
     % workday InLight
     disp( sprintf( ['\nWORKDAY INLIGHT: Attempt #%d'], i ) );
-    [ network, nMF, mse ] =  searchBestAnfis( trainInlight, checkingInlight, testInlight );
+    [ network, nMF, mse,err ] =  searchBestAnfis( trainInlight, checkingInlight, testInlight );
     if mse < bestMseWorkInl
         disp( sprintf( ['Best values found - MSE #%d'], mse ) );
         bestMfWorkInl  = nMF;
         bestMseWorkInl = mse;
+        bestErrWorkInl = err;
         bestNetworkWorkInl = network;
         bestNmfInlEn = nMF;
 
@@ -73,10 +66,13 @@ for i = ITERATIONS
         unix(['mv ../data/anfis/workday/*Inlight.csv ' ...
               '../data/anfis/workday/best\ data\']);
     end
-    unix('cd ../data/anfis; ./workday.rb');
-
+    disp( sprintf( ['MSE #%d'], bestMseWorkInl ) );    
+    setNewAnfisValues;
 end
 
+bestErrHoliday
+bestErrWorkE
+bestErrWorkInl
 % PLOTS tests
 testplot( bestNetworkHoliday, test, sprintf('Holiday inlight Mse: %f',bestMseHoliday));
 testplot( bestNetworkWorkE, testEnergy, sprintf('Workday Energy Mse: %f',bestMseWorkE));

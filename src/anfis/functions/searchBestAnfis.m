@@ -4,7 +4,7 @@
 %
 % Output: [network, train_errors, test_errors, check_errors]
 
-function [ network, nMF, bestTestMse ] = searchBestAnfis( trnData, chData, testData )
+function [ network, nMF, bestTestMse, bestErrors ] = searchBestAnfis( trnData, chData, testData )
 
     EPOCHES_VALUES = [30:10:80];
     GOAL_MSE       = 20;
@@ -43,6 +43,8 @@ function [ network, nMF, bestTestMse ] = searchBestAnfis( trnData, chData, testD
                 % tests the network
                 anfis_output = evalfis( test_inputs, out_fis );
 
+                err_test = test_targets(:) - anfis_output(:);
+
                 mse = sqrt( sum( (test_targets(:) - anfis_output(:)).^2) / numel(test_targets) );
 
                 disp(sprintf( ['Epoches #%d - Mfs: [%d %d] - MSE #%d'], epoch_n, i, j, mse ) );
@@ -51,6 +53,7 @@ function [ network, nMF, bestTestMse ] = searchBestAnfis( trnData, chData, testD
                 %mse ( doesn't exist a matlab function)
                 if mse < bestTestMse
                     bestTestMse = mse;
+                    bestErrors = err_test;
                     network = out_fis;
                     nMF = numMFs;
 
