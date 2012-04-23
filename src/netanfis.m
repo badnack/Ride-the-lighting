@@ -1,3 +1,4 @@
+clear
 addpath('anfis/functions');
 
 % generates the necessary files

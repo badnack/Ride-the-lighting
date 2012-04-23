@@ -1,6 +1,7 @@
 % -*- mode: matlab -*-
 % Neural network fitting
 
+clear;
 addpath('./neural network/functions');
 
 % generates necessary data
@@ -11,20 +12,20 @@ load '../data/targetAll.csv';
 
 [ net, train, outputs, errors ] = searchBestFitting( inputAll', targetAll' );
 
-errorsTrain = errors(:, train.trainInd);
-errorsVal   = errors(:, train.valInd);
-errorsTest  = errors(:, train.testInd);
+errorsTrain = errors( :, train.trainInd );
+errorsVal   = errors( :, train.valInd );
+errorsTest  = errors( :, train.testInd );
 
 % value to save to plot regressions
 targetTrasp  = targetAll';
 
-targetTrain = targetTrasp(:,train.trainInd);
-targetVal = targetTrasp(:,train.valInd);
-targetTest = targetTrasp(:,train.testInd);
+targetTrain = targetTrasp( :, train.trainInd );
+targetVal = targetTrasp( :, train.valInd );
+targetTest = targetTrasp( :, train.testInd );
 
-outTest  = outputs(:,train.testInd);
-outVal   = outputs(:,train.valInd);
-outTrain = outputs(:,train.trainInd);
+outTest  = outputs( :, train.testInd );
+outVal   = outputs( :, train.valInd );
+outTrain = outputs( :, train.trainInd );
 
 view ( net )
 figure, plotperform( train )

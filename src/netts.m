@@ -1,6 +1,7 @@
 % -*- mode: matlab -*-
 % Time Series model
 
+clear;
 addpath('./time series/functions');
 unix('cd ../data/time\ series; ./energy.rb');
 unix('cd ../data/time\ series; ./inlight.rb');
