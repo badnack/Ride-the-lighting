@@ -18,7 +18,7 @@ load '../data/anfis/workday/checkingInlight.csv';
 load '../data/anfis/workday/testInlight.csv';
 
 
-ITERATIONS = [1:20];
+ITERATIONS = [1:5];
 
 bestMseHoliday = inf;
 bestMseWorkInl = inf;
@@ -31,6 +31,7 @@ for i = ITERATIONS
     disp( sprintf( ['\nHOLIDAY INLIGHT: Attempt #%d'], i ) );
     [ network, nMF, mse ] =  searchBestAnfis( train, checking, test );
     if mse < bestMseHoliday
+        disp( sprintf( ['Best values found - MSE #%d'], mse ) );
         bestMfHoliday = nMF;
         bestMseHoliday = mse;
         bestNetworkHoliday = network;
@@ -45,6 +46,7 @@ for i = ITERATIONS
     disp( sprintf( ['\nWORKDAY ENERGY: Attempt #%d'], i ) );
     [ network, nMF, mse ] =  searchBestAnfis( trainEnergy, checkingEnergy, testEnergy );
     if mse < bestMseWorkE
+        disp( sprintf( ['Best values found - MSE #%d'], mse ) );
         bestMfWorkEn     = nMF;
         bestMseWorkE    = mse;
         bestNetworkWorkE = network;
@@ -60,6 +62,7 @@ for i = ITERATIONS
     disp( sprintf( ['\nWORKDAY INLIGHT: Attempt #%d'], i ) );
     [ network, nMF, mse ] =  searchBestAnfis( trainInlight, checkingInlight, testInlight );
     if mse < bestMseWorkInl
+        disp( sprintf( ['Best values found - MSE #%d'], mse ) );
         bestMfWorkInl  = nMF;
         bestMseWorkInl = mse;
         bestNetworkWorkInl = network;

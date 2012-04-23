@@ -50,8 +50,6 @@ function [ network, nMF, bestTestMse ] = searchBestAnfis( trnData, chData, testD
 
                 %mse ( doesn't exist a matlab function)
                 if mse < bestTestMse
-
-                    disp( 'best value found!' );
                     bestTestMse = mse;
                     network = out_fis;
                     nMF = numMFs;

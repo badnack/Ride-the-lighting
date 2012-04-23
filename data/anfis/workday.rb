@@ -126,11 +126,6 @@ indexMaxoutlight = -1
 
 CSV.foreach( @datapath ) do |row|
 
-  if count < 30 && row[IN_LIGHT].to_i < 30
-    count += 1
-    next
-  end
-
   if WORKDAY.include? row[DAY].to_i
     linesInlight.push [ row[HOUR], row[OUT_LIGHT], row[IN_LIGHT] ]
     linesEnergy.push [ row[HOUR], row[OUT_LIGHT], row[ENERGY] ]

@@ -86,11 +86,6 @@ indexMaxoutlight = -1
 
 CSV.foreach( @datapath ) do |row|
 
-  if count < 30 && row[IN_LIGHT].to_i < 30
-    count += 1
-    next
-  end
-
   if HOLIDAY.include? row[DAY].to_i and row[IN_LIGHT].to_i < 650 # avoiding outliers and select holidays
 
     lines.push [ row[HOUR], row[OUT_LIGHT], row[IN_LIGHT] ]
