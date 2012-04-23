@@ -6,7 +6,7 @@ require "date"
 
 
 # Options
-datapath   = "data.csv"
+datapath   = "original\ data/data.csv"
 input_all  = "inputAll.csv"
 target_all = "targetAll.csv"
 new_data   = "conformData.csv"
@@ -108,9 +108,9 @@ end # end def
 
 CSV.foreach( datapath ) do |row|
 
-    if isOutlier( row )
-      next
-    end
+  if isOutlier( row )
+    next
+  end
 
   # Hour averages
   if row[MINUTE].to_i == HOUR_HALF
