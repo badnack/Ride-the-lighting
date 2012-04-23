@@ -39,7 +39,7 @@ ENERGY_LOW = 150
 
 count = 0
 
-def dataSplit( dataInlight, dataEnergy )
+def dataSplit( dataInlight, dataEnergy, indexMaxoutlight )
 
   trainInl    = CSV.open( @trainInlight, "w" )
   testInl     = CSV.open( @testInlight, "w" )
@@ -57,13 +57,17 @@ def dataSplit( dataInlight, dataEnergy )
   dataTest = dataInlight.length * TEST_RATIO
   dataTrain = dataInlight.length * TRAIN_RATIO
 
-
   # Inlight lines split
+
+  #BUG FIXED: add higher value to train set in order to avoid evalfis error
+  trainInl << dataInlight[indexMaxoutlight]
+  dataInlight.delete_at indexMaxoutlight
   dataTrain.to_i.times do |i|
     index = rand*dataInlight.length.to_i
     trainInl << dataInlight[index-1]
     dataInlight.delete_at index-1
   end
+
 
   dataChecking.to_i.times do |i|
     index = rand*dataInlight.length.to_i
@@ -82,6 +86,11 @@ def dataSplit( dataInlight, dataEnergy )
   dataChecking = dataEnergy.length * CHECKING_RATIO
   dataTest = dataEnergy.length * TEST_RATIO
   dataTrain = dataEnergy.length * TRAIN_RATIO
+
+  #BUG FIXED: add higher value to train set in order to avoid evalfis error
+  trainE << dataEnergy[indexMaxoutlight]
+  dataEnergy.delete_at indexMaxoutlight
+
 
   dataTrain.to_i.times do |i|
     index = rand*dataEnergy.length.to_i
@@ -112,6 +121,8 @@ end
 
 linesInlight = Array.new
 linesEnergy  = Array.new
+maxOutlight = 0
+indexMaxoutlight = -1
 
 CSV.foreach( @datapath ) do |row|
 
@@ -123,7 +134,13 @@ CSV.foreach( @datapath ) do |row|
   if WORKDAY.include? row[DAY].to_i
     linesInlight.push [ row[HOUR], row[OUT_LIGHT], row[IN_LIGHT] ]
     linesEnergy.push [ row[HOUR], row[OUT_LIGHT], row[ENERGY] ]
+
+    if row[OUT_LIGHT].to_f > maxOutlight # max outlight sample
+      maxOutlight = row[OUT_LIGHT].to_f
+      indexMaxoutlight = linesInlight.length.to_i - 1
+    end
+
   end
 end
 
-dataSplit linesInlight, linesEnergy
+dataSplit linesInlight, linesEnergy, indexMaxoutlight

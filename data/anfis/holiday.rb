@@ -37,7 +37,7 @@ ENERGY_LOW = 150
 
 count = 0
 
-def dataSplit( lines )
+def dataSplit( lines, indexMaxoutlight )
 
   train    = CSV.open( @trainAnfis, "w" )
   test     = CSV.open( @testAnfis, "w" )
@@ -50,12 +50,16 @@ def dataSplit( lines )
   linesTest = lines.length * TEST_RATIO
   linesTrain = lines.length * TRAIN_RATIO
 
+  #BUG FIXED: add higher value to train set in order to avoid evalfis error
+  train << lines[indexMaxoutlight]
+  lines.delete_at indexMaxoutlight
 
   linesTrain.to_i.times do |i|
     index = rand*lines.length.to_i
     train << lines[index-1]
     lines.delete_at index-1
   end
+
 
   linesChecking.to_i.times do |i|
     index = rand*lines.length.to_i
@@ -77,6 +81,8 @@ def dataSplit( lines )
 end
 
 lines = Array.new
+maxOutlight = 0
+indexMaxoutlight = -1
 
 CSV.foreach( @datapath ) do |row|
 
@@ -85,11 +91,17 @@ CSV.foreach( @datapath ) do |row|
     next
   end
 
-  if HOLIDAY.include? row[DAY].to_i
-    if row[IN_LIGHT].to_i < 650
-      lines.push [ row[HOUR], row[OUT_LIGHT], row[IN_LIGHT] ]
-    end
+  if HOLIDAY.include? row[DAY].to_i and row[IN_LIGHT].to_i < 650 # avoiding outliers and select holidays
+
+    lines.push [ row[HOUR], row[OUT_LIGHT], row[IN_LIGHT] ]
+
+      if row[OUT_LIGHT].to_f > maxOutlight # max outlight sample
+        maxOutlight = row[OUT_LIGHT].to_f
+        indexMaxoutlight = lines.length.to_i - 1
+      end
+
   end
+
 end
 
-dataSplit lines
+dataSplit lines, indexMaxoutlight
