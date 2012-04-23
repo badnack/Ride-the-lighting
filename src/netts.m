@@ -12,16 +12,63 @@ load '../data/time series/inputInlight.csv';
 load '../data/time series/targetInlight.csv';
 
 
-[ net, train, outputs, errors, inputs, targets ] = searchBestTimeSeries( inputEnergy, targetEnergy );
+[ netE, trainE, outputsE, errorsE, inputsE, targetsE ] = searchBestTimeSeries( inputEnergy, targetEnergy );
+
+errorsTrainE = errorsE( :, trainE.trainInd );
+errorsValE   = errorsE( :, trainE.valInd );
+errorsTestE  = errorsE( :, trainE.testInd );
+
+% value to save to plot regressions
+targetTrainE = targetsE( :, trainE.trainInd );
+targetValE   = targetsE( :, trainE.valInd );
+targetTestE  = targetsE( :, trainE.testInd );
+
+outTestE  = outputsE( :, trainE.testInd );
+outValE   = outputsE( :, trainE.valInd );
+outTrainE = outputsE( :, trainE.trainInd );
 
 % View the Network
-view(net)
+view(netE)
 
 % Plots
 % Uncomment these lines to enable various plots.
-figure, plotperform(train)
-figure, plottrainstate(train)
-figure, plotregression(targets,outputs)
-figure, plotresponse(targets,outputs)
-figure, ploterrcorr(errors)
-figure, plotinerrcorr(inputs,errors)
+figure, plotregression( targetTrainE, outTrainE,'Training',targetValE,outValE, ...
+                        'Validation', targetTestE, outTestE, 'Test', ...
+                        targetsE, outputsE, 'All')
+
+figure, plotperform( trainE )
+figure, plottrainstate( trainE )
+figure, plotresponse( targetsE, outputsE )
+figure, ploterrcorr( errorsE )
+figure, plotinerrcorr( inputsE, errorsE )
+
+
+[ netInl, trainInl, outputsInl, errorsInl, inputsInl, targetsInl ] = searchBestTimeSeries( inputInlight, targetInlight );
+
+errorsTrainInl = errorsInl( :, trainInl.trainInd );
+errorsValInl   = errorsInl( :, trainInl.valInd );
+errorsTestInl  = errorsInl( :, trainInl.testInd );
+
+% value to save to plot regressions
+targetTrainInl = targetsInl( :, trainInl.trainInd );
+targetValInl   = targetsInl( :, trainInl.valInd );
+targetTestInl  = targetsInl( :, trainInl.testInd );
+
+outTestInl  = outputsInl( :, trainInl.testInd );
+outValInl   = outputsInl( :, trainInl.valInd );
+outTrainInl = outputsInl( :, trainInl.trainInd );
+
+% View the Network
+view( netInl )
+
+% Plots
+% Uncomment these lines to enable various plots.
+figure, plotregression( targetTrainInl, outTrainInl, 'Training', targetValInl, outValInl, ...
+                        'Validation', targetTestInl, outTestInl, 'Test', ...
+                        targetsInl, outputsInl, 'All')
+
+figure, plotperform( trainInl )
+figure, plottrainstate( trainInl )
+figure, plotresponse( targetsInl, outputsInl )
+figure, ploterrcorr( errorsInl )
+figure, plotinerrcorr( inputsInl, errorsInl )
