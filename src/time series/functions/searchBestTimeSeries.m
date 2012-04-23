@@ -98,9 +98,7 @@ function [ network, training, outputs, errors, inputs, targets ] = searchBestTim
                     training = tr;
                     outputs  = out;
                     errors   = err;
-                    
-                    return
-                    
+
                     % Goal reached
                     if ( testMse <= GOAL_MSE  && testReg >= GOAL_REGRESSION )
                         disp( 'Goal reached!' );
