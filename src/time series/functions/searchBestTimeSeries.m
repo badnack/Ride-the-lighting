@@ -6,8 +6,8 @@
 
 function [ network, training, outputs, errors, inputs, targets ] = searchBestTimeSeries( inputs, targets )
 
-    GOAL_MSE        = 1000;
-    GOAL_REGRESSION = 0.99;
+    GOAL_MSE        = 2000;
+    GOAL_REGRESSION = 0.85;
 
     DELAYS = 2:8;
     HIDDEN_LAYER_SIZES = 10:25;
@@ -98,7 +98,7 @@ function [ network, training, outputs, errors, inputs, targets ] = searchBestTim
                     training = tr;
                     outputs  = out;
                     errors   = err;
-
+                    return
                     % Goal reached
                     if ( testMse <= GOAL_MSE  && testReg >= GOAL_REGRESSION )
                         disp( 'Goal reached!' );
@@ -119,6 +119,10 @@ function valid = checkCorr( a, b, tollerance )
     BAD_STEP_TOLLERANCE = 1;
     STEPS = 20;
     corr_limit = -1;
+
+    size = min( length(a), length(b) );
+    a = a(1,1:size);
+    b = b(1,1:size);
 
     maxlagi = min( STEPS, numtimesteps( b ) - 1 );
     corr = nncorr( a, b, maxlagi, 'unbiased' );
