@@ -18,9 +18,6 @@ function [ network, training, outputs, errors, inputs, targets ] = searchBestTim
 
     RETRAIN_ATTEMPTS = 20;
 
-    % Prepare data
-    inputSeries = tonndata( inputs, false, false );
-    targetSeries = tonndata( targets, false, false );
 
     bestTestReg   = 0;
     bestValReg    = 0;
@@ -32,9 +29,14 @@ function [ network, training, outputs, errors, inputs, targets ] = searchBestTim
     training          = 0 ;
     outputs           = 0;
     errors            = inf;
+    % Prepare data
+    inputSeries = tonndata( inputs, false, false );
+    targetSeries = tonndata( targets, false, false );
 
     for i = HIDDEN_LAYER_SIZES
         for d = DELAYS
+
+
 
             % Create a Nonlinear Autoregressive Network with External Input
             inputDelays = 1:d;
@@ -42,7 +44,7 @@ function [ network, training, outputs, errors, inputs, targets ] = searchBestTim
             hiddenLayerSize = i;
             net = narxnet( inputDelays, feedbackDelays, hiddenLayerSize );
 
-            [ inputs, inputStates, layerStates, targets ] = preparets( net, inputSeries, {}, targetSeries );
+            [ in, inputStates, layerStates, tar ] = preparets( net, inputSeries, {}, targetSeries );
 
             net.divideFcn = 'dividerand';  % Divide data randomly
             net.divideMode = 'value';  % Divide up every value
@@ -64,24 +66,24 @@ function [ network, training, outputs, errors, inputs, targets ] = searchBestTim
                 net = init( net );
 
                 % Train the Network
-                [ net, tr ] = train( net,inputs,targets, inputStates,layerStates );
+                [ net, tr ] = train( net,in,tar, inputStates,layerStates );
 
                 % Test the Network
-                out = net( inputs,inputStates,layerStates );
-                err = gsubtract( targets, out );
-                mse = perform( net, targets, out );
+                out = net( in,inputStates,layerStates );
+                err = gsubtract( tar, out );
+                mse = perform( net, tar, out );
 
 
-                xi = nnfast.getelements( inputs, 1 );
+                xi = nnfast.getelements( in, 1 );
                 ei = nnfast.getelements( err, 1 );
                 errcorr = checkCorr( ei, ei, 1 );
                 inecorr = checkCorr( xi, ei, 1 );
 
                 % Recalculate Training, Validation and Test Performance
-                testMse = perform( net,targets( :, tr.testInd),out ( :, tr.testInd ) );
-                valMse = perform( net,targets( :, tr.valInd ),out( :,tr.valInd ) );
-                valReg = regression( targets( :, tr.valInd ), out( :,tr.valInd ), 'one' );
-                testReg = regression( targets( :, tr.testInd ),out( :,tr.testInd ), 'one' );
+                testMse = perform( net,tar( :, tr.testInd),out ( :, tr.testInd ) );
+                valMse = perform( net,tar( :, tr.valInd ),out( :,tr.valInd ) );
+                valReg = regression( tar( :, tr.valInd ), out( :,tr.valInd ), 'one' );
+                testReg = regression( tar( :, tr.testInd ),out( :,tr.testInd ), 'one' );
 
 
                 if ( valMse <= bestValMse && testMse <= ...
@@ -98,7 +100,9 @@ function [ network, training, outputs, errors, inputs, targets ] = searchBestTim
                     training = tr;
                     outputs  = out;
                     errors   = err;
-                    return
+                    targets = tar;
+                    inputs = in;
+
                     % Goal reached
                     if ( testMse <= GOAL_MSE  && testReg >= GOAL_REGRESSION )
                         disp( 'Goal reached!' );
