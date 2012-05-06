@@ -128,7 +128,7 @@ function valid = checkCorr( a, b, tollerance )
     a = a(1,1:size);
     b = b(1,1:size);
 
-    maxlagi = min( STEPS, numtimesteps( b ) - 1 );
+    maxlagi = min( STEPS, numtimesteps( a ) - 1 );
     corr = nncorr( a, b, maxlagi, 'unbiased' );
     corr = corr{1,1};
 
