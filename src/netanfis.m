@@ -2,7 +2,16 @@ clear
 addpath('anfis/functions');
 
 % generates the necessary files
-setNewAnfisValues;
+load '../data/anfis/holiday/train.csv';
+load '../data/anfis/holiday/checking.csv';
+load '../data/anfis/holiday/test.csv';
+load '../data/anfis/workday/trainEnergy.csv';
+load '../data/anfis/workday/checkingEnergy.csv';
+load '../data/anfis/workday/testEnergy.csv';
+load '../data/anfis/workday/trainInlight.csv';
+load '../data/anfis/workday/checkingInlight.csv';
+load '../data/anfis/workday/testInlight.csv';
+
 
 ITERATIONS = [1:50];
 
@@ -26,11 +35,8 @@ for i = ITERATIONS
         bestErrHoliday = err;
         bestNetworkHoliday = network;
         bestNmfHoliday = nMF;
-        % save also the file found!
-        unix(['mv ../data/anfis/holiday/*.csv ' ...
-              '../data/anfis/holiday/best\ data\']);
     end
-    
+
     disp( sprintf( ['MSE #%d'], bestMseHoliday ) );
 
     % workday Energy
@@ -43,11 +49,6 @@ for i = ITERATIONS
         bestErrWorkE     = err;
         bestNetworkWorkE = network;
         bestNmfWorkEn = nMF;
-
-        % save also the file found!
-        % FIXME: find a best method
-        unix(['mv ../data/anfis/workday/*Energy.csv ' ...
-              '../data/anfis/workday/best\ data\']);
     end
     disp( sprintf( ['MSE #%d'], bestMseWorkE ) );
 
@@ -62,13 +63,8 @@ for i = ITERATIONS
         bestNetworkWorkInl = network;
         bestNmfInlEn = nMF;
 
-        % save also the file found!
-        % FIXME: find a best method
-        unix(['mv ../data/anfis/workday/*Inlight.csv ' ...
-              '../data/anfis/workday/best\ data\']);
     end
-    disp( sprintf( ['MSE #%d'], bestMseWorkInl ) );    
-    setNewAnfisValues;
+    disp( sprintf( ['MSE #%d'], bestMseWorkInl ) );
 end
 
 bestErrHoliday
