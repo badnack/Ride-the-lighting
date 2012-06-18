@@ -23,49 +23,46 @@ bestErrHoliday = inf;
 bestErrWorkInl = inf;
 bestErrWorkE   = inf;
 
-for i = ITERATIONS
-
-    % holiday Inlight
-    disp( sprintf( ['\nHOLIDAY INLIGHT: Attempt #%d'], i ) );
-    [ network, nMF, mse, err ] =  searchBestAnfis( train, checking, test );
-    if mse < bestMseHoliday
-        disp( sprintf( ['Best values found - MSE #%d'], mse ) );
-        bestMfHoliday = nMF;
-        bestMseHoliday = mse;
-        bestErrHoliday = err;
-        bestNetworkHoliday = network;
-        bestNmfHoliday = nMF;
-    end
-
-    disp( sprintf( ['MSE #%d'], bestMseHoliday ) );
-
-    % workday Energy
-    disp( sprintf( ['\nWORKDAY ENERGY: Attempt #%d'], i ) );
-    [ network, nMF, mse,err ] =  searchBestAnfis( trainEnergy, checkingEnergy, testEnergy );
-    if mse < bestMseWorkE
-        disp( sprintf( ['Best values found - MSE #%d'], mse ) );
-        bestMfWorkEn     = nMF;
-        bestMseWorkE     = mse;
-        bestErrWorkE     = err;
-        bestNetworkWorkE = network;
-        bestNmfWorkEn = nMF;
-    end
-    disp( sprintf( ['MSE #%d'], bestMseWorkE ) );
-
-    % workday InLight
-    disp( sprintf( ['\nWORKDAY INLIGHT: Attempt #%d'], i ) );
-    [ network, nMF, mse,err ] =  searchBestAnfis( trainInlight, checkingInlight, testInlight );
-    if mse < bestMseWorkInl
-        disp( sprintf( ['Best values found - MSE #%d'], mse ) );
-        bestMfWorkInl  = nMF;
-        bestMseWorkInl = mse;
-        bestErrWorkInl = err;
-        bestNetworkWorkInl = network;
-        bestNmfInlEn = nMF;
-
-    end
-    disp( sprintf( ['MSE #%d'], bestMseWorkInl ) );
+% holiday Inlight
+disp( sprintf( ['\nHOLIDAY INLIGHT: Attempt #%d'], i ) );
+[ network, nMF, mse, err ] =  searchBestAnfis( train, checking, test );
+if mse < bestMseHoliday
+    disp( sprintf( ['Best values found - MSE #%d'], mse ) );
+    bestMfHoliday = nMF;
+    bestMseHoliday = mse;
+    bestErrHoliday = err;
+    bestNetworkHoliday = network;
+    bestNmfHoliday = nMF;
 end
+
+disp( sprintf( ['MSE #%d'], bestMseHoliday ) );
+
+% workday Energy
+disp( sprintf( ['\nWORKDAY ENERGY: Attempt #%d'], i ) );
+[ network, nMF, mse,err ] =  searchBestAnfis( trainEnergy, checkingEnergy, testEnergy );
+if mse < bestMseWorkE
+    disp( sprintf( ['Best values found - MSE #%d'], mse ) );
+    bestMfWorkEn     = nMF;
+    bestMseWorkE     = mse;
+    bestErrWorkE     = err;
+    bestNetworkWorkE = network;
+    bestNmfWorkEn = nMF;
+end
+disp( sprintf( ['MSE #%d'], bestMseWorkE ) );
+
+% workday InLight
+disp( sprintf( ['\nWORKDAY INLIGHT: Attempt #%d'], i ) );
+[ network, nMF, mse,err ] =  searchBestAnfis( trainInlight, checkingInlight, testInlight );
+if mse < bestMseWorkInl
+    disp( sprintf( ['Best values found - MSE #%d'], mse ) );
+    bestMfWorkInl  = nMF;
+    bestMseWorkInl = mse;
+    bestErrWorkInl = err;
+    bestNetworkWorkInl = network;
+    bestNmfInlEn = nMF;
+
+end
+disp( sprintf( ['MSE #%d'], bestMseWorkInl ) );
 
 bestErrHoliday
 bestErrWorkE
