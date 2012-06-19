@@ -26,7 +26,7 @@ target = CSV.open( targetE, "w")
 
 
 CSV.foreach( datapath ) do |row|
-  input << [row[OUT_LIGHT], row[WEEK], row[DAY], row[HOUR] ]
+  input << [ row[DAY], row[WEEK], row[HOUR], row[OUT_LIGHT] ]
   target << [row[IN_LIGHT]]
 end
 

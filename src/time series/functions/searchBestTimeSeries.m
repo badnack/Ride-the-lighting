@@ -7,16 +7,16 @@
 function [ network, training, outputs, errors, inputs, targets ] = searchBestTimeSeries( inputs, targets )
 
     GOAL_MSE        = 2000;
-    GOAL_REGRESSION = 0.85;
+    GOAL_REGRESSION = 0.99;
 
-    DELAYS = 2:8;
-    HIDDEN_LAYER_SIZES = 10:25;
+    DELAYS = 2:4;
+    HIDDEN_LAYER_SIZES = 10:12;
 
     TRAIN_RATIO      = 0.7;
     VALIDATION_RATIO = 0.15;
     TEST_RATIO       = 0.15;
 
-    RETRAIN_ATTEMPTS = 20;
+    RETRAIN_ATTEMPTS = 50;
 
 
     bestTestReg   = 0;
@@ -76,8 +76,11 @@ function [ network, training, outputs, errors, inputs, targets ] = searchBestTim
 
                 xi = nnfast.getelements( in, 1 );
                 ei = nnfast.getelements( err, 1 );
-                errcorr = checkCorr( ei, ei, 1 );
-                inecorr = checkCorr( xi, ei, 1 );
+
+
+
+                inecorr = checkCorr( xi, ei, ei, 1 );
+                errcorr = checkCorr( ei, ei, xi, 1 );
 
                 % Recalculate Training, Validation and Test Performance
                 testMse = perform( net,tar( :, tr.testInd),out ( :, tr.testInd ) );
@@ -86,9 +89,9 @@ function [ network, training, outputs, errors, inputs, targets ] = searchBestTim
                 testReg = regression( tar( :, tr.testInd ),out( :,tr.testInd ), 'one' );
 
 
-                if ( valMse <= bestValMse && testMse <= ...
+                if ( testMse <= ...
                      bestTestMse && testReg >= ...
-                     bestTestReg && valReg >= bestValReg && inecorr && ...
+                     bestTestReg &&  inecorr && ...
                      errcorr )
 
                     disp( 'Best net found!' );
@@ -102,7 +105,6 @@ function [ network, training, outputs, errors, inputs, targets ] = searchBestTim
                     errors   = err;
                     targets = tar;
                     inputs = in;
-
                     % Goal reached
                     if ( testMse <= GOAL_MSE  && testReg >= GOAL_REGRESSION )
                         disp( 'Goal reached!' );
@@ -118,8 +120,8 @@ function [ network, training, outputs, errors, inputs, targets ] = searchBestTim
 end
 
 % Check error autocorrelation
-% Return TRUE if correlation values aren't too bad
-function valid = checkCorr( a, b, tollerance )
+% Return TRUE if correlation values aren't bad
+function valid = checkCorr( a, b, lagi, tollerance )
     BAD_STEP_TOLLERANCE = 1;
     STEPS = 20;
     corr_limit = -1;
@@ -127,8 +129,10 @@ function valid = checkCorr( a, b, tollerance )
     size = min( length(a), length(b) );
     a = a(1,1:size);
     b = b(1,1:size);
+    lagi = lagi(1,1:size);
 
-    maxlagi = min( STEPS, numtimesteps( a ) - 1 );
+
+    maxlagi = min( STEPS, numtimesteps( lagi ) - 1 );
     corr = nncorr( a, b, maxlagi, 'unbiased' );
     corr = corr{1,1};
 
