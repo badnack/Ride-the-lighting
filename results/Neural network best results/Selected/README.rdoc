@@ -1,5 +1,0 @@
-Workspace selected
-===================
-
-The workspace selcted is:
-"optNoOutliers1" from "Best net using test value and removed some outliers [c: 87c469853a64652]"
