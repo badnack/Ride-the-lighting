@@ -9,8 +9,8 @@ function [ network, training, outputs, errors, inputs, targets ] = searchBestTim
     GOAL_MSE        = 2000;
     GOAL_REGRESSION = 0.99;
 
-    DELAYS = 2:4;
-    HIDDEN_LAYER_SIZES = 10:12;
+    DELAYS = 2:8;
+    HIDDEN_LAYER_SIZES = 10:25;
 
     TRAIN_RATIO      = 0.7;
     VALIDATION_RATIO = 0.15;
@@ -35,8 +35,6 @@ function [ network, training, outputs, errors, inputs, targets ] = searchBestTim
 
     for i = HIDDEN_LAYER_SIZES
         for d = DELAYS
-
-
 
             % Create a Nonlinear Autoregressive Network with External Input
             inputDelays = 1:d;
@@ -78,9 +76,8 @@ function [ network, training, outputs, errors, inputs, targets ] = searchBestTim
                 ei = nnfast.getelements( err, 1 );
 
 
-
-                inecorr = checkCorr( xi, ei, ei, 1 );
-                errcorr = checkCorr( ei, ei, xi, 1 );
+                inecorr = checkCorr( xi, ei, 1 );
+                errcorr = checkCorr( ei, ei, 1 );
 
                 % Recalculate Training, Validation and Test Performance
                 testMse = perform( net,tar( :, tr.testInd),out ( :, tr.testInd ) );
@@ -105,6 +102,7 @@ function [ network, training, outputs, errors, inputs, targets ] = searchBestTim
                     errors   = err;
                     targets = tar;
                     inputs = in;
+                    return
                     % Goal reached
                     if ( testMse <= GOAL_MSE  && testReg >= GOAL_REGRESSION )
                         disp( 'Goal reached!' );
@@ -121,7 +119,7 @@ end
 
 % Check error autocorrelation
 % Return TRUE if correlation values aren't bad
-function valid = checkCorr( a, b, lagi, tollerance )
+function valid = checkCorr( a, b, tollerance )
     BAD_STEP_TOLLERANCE = 1;
     STEPS = 20;
     corr_limit = -1;
@@ -129,10 +127,9 @@ function valid = checkCorr( a, b, lagi, tollerance )
     size = min( length(a), length(b) );
     a = a(1,1:size);
     b = b(1,1:size);
-    lagi = lagi(1,1:size);
 
 
-    maxlagi = min( STEPS, numtimesteps( lagi ) - 1 );
+    maxlagi = min( STEPS, numtimesteps( a ) - 1 );
     corr = nncorr( a, b, maxlagi, 'unbiased' );
     corr = corr{1,1};
 
