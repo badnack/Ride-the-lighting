@@ -12,7 +12,8 @@
 
 \usepackage{lipsum}                          % Package to create dummy text
 
-\usepackage[english]{babel}                    % English language/hyphenation
+\usepackage[italian]{babel}                    % Italian language/hyphenation
+\usepackage[utf8]{inputenc}
 \usepackage[protrusion=true,expansion=true]{microtype}        % Better typography
 \usepackage{amsmath,amsfonts,amsthm}          % Math packages
 \usepackage[pdftex]{graphicx}                  % Enable pdflatex
@@ -47,9 +48,9 @@
 \chead{}
 \rhead{}
 % Footer (you may change this to your own needs)
-\lfoot{\footnotesize \texttt{HowToTeX.com} \textbullet ~Two column article template}
+\lfoot{\footnotesize \texttt{Progetto di Sistemi Intelligenti} \textbullet ~A.A. 2011/2012}
 \cfoot{}
-\rfoot{\footnotesize page \thepage\ of \pageref{LastPage}}  % "Page 1 of 2"
+\rfoot{\footnotesize pagina \thepage\ di \pageref{LastPage}}
 \renewcommand{\headrulewidth}{0.0pt}
 \renewcommand{\footrulewidth}{0.4pt}
 
@@ -74,14 +75,16 @@
 \pretitle{\vspace{-30pt} \begin{flushleft} \HorRule
         \fontsize{50}{50} \usefont{OT1}{phv}{b}{n} \color{DarkRed} \selectfont
         }
-\title{This is the title of the template article}          % Title of your article goes here
+\title{Progetto di \\ Sistemi Intelligenti}          % Title of your article goes here
 \posttitle{\par\end{flushleft}\vskip 0.5em}
 
 \preauthor{\begin{flushleft}
           \large \lineskip 0.5em \usefont{OT1}{phv}{b}{sl} \color{DarkRed}}
-\author{Firstname Lastname, }                      % Author name goes here
+\author{F. Disperati, D. Pellegrino, N. Redini, }                      % Author name goes here
 \postauthor{\footnotesize \usefont{OT1}{phv}{m}{sl} \color{Black}
-          University of Examples                  % Institution of author
+          University of Pisa                   % Institution of author
+          \vskip 1em
+          Anno Accademico 2011/2012
           \par\end{flushleft}\HorRule}
 
 \date{}                                        % No date
