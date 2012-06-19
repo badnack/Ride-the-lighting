@@ -1,6 +1,6 @@
 % -*- mode: matlab -*-
 %
-% Search best neural network
+% Search adaptive network (ANFIS)
 %
 % Output: [network, train_errors, test_errors, check_errors]
 
