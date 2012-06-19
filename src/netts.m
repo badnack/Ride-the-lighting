@@ -42,6 +42,7 @@ figure, plottrainstate( trainE )
 figure, plotresponse( targetsE, outputsE )
 figure, ploterrcorr( errorsE )
 figure, plotinerrcorr( inputsE, errorsE )
+figure, ploterrhist( errorsTrainE, 'train', errorsValE, 'validation', errorsTestE, 'test' )
 
 
 [ netInl, trainInl, outputsInl, errorsInl, inputsInl, targetsInl ] = searchBestTimeSeries( inputInlight, targetInlight );
@@ -73,3 +74,4 @@ figure, plottrainstate( trainInl )
 figure, plotresponse( targetsInl, outputsInl )
 figure, ploterrcorr( errorsInl )
 figure, plotinerrcorr( inputsInl, errorsInl )
+figure, ploterrhist( errorsTrainInl, 'train', errorsValInl, 'validation', errorsTestInl, 'test' )
