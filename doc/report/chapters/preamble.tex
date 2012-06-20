@@ -24,6 +24,12 @@
 \usepackage{booktabs}                        % Nicer tables
 \usepackage{fix-cm}                          % Custom fontsizes
 \usepackage{minted}                          % Color highlighted source code
+\usepackage{textcomp}
+\usepackage{amstext}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+\newcommand{\lyxmathsym}[1]{\ifmmode\begingroup\def\b@ld{bold}
+  \text{\ifx\math@version\b@ld\bfseries\fi#1}\endgroup\else#1\fi}
 
 
 

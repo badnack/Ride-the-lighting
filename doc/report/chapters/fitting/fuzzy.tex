@@ -35,65 +35,55 @@ Si definirà un FIS per ogni variabile di uscita del problema in modo tale da po
 \subsubsection{Definizione delle MFs}
 In ingresso al sistema avremo perciò, come discusso precedentemente, soltanto due variabili, l'ora del giorno e l'irraggiamento.
 
-Il modello avrà la seguente struttura:
-
-\begin{figure}
-  \centering
-  \includegraphics[scale=0.5]{images/fuzzy/modello_fuzzy_luminosita.pdf}
-  \caption{Modello fuzzy luminosità}
-\end{figure}
+Il modello avrà la seguente struttura:\\
+\vspace{20px}
+\includegraphics[scale=0.5]{images/fuzzy/modello_fuzzy_luminosita.pdf}
+\captionof{figure}[One figure]{Modello fuzzy luminosità}
+\vspace{20px}
 
 A questo punto è necessario analizzare ogni variabile per poter definire il suo insieme di valori significativi e successivamente le sue MFs.
 
-Per quanto riguarda l'ora sono stati scelti cinque elementi lessicali (Notte, Prima Mattina, Mattina, Pomeriggio, Sera) che rappresentino gli insiemi fuzzy; le relative funzioni di appartenenza risulteranno:
+Per quanto riguarda l'ora sono stati scelti cinque elementi lessicali (Notte, Prima Mattina, Mattina, Pomeriggio, Sera) che rappresentino gli insiemi fuzzy; le relative funzioni di appartenenza risulteranno:\\
 
-\begin{figure}
-  \centering
-  \includegraphics[scale=0.5]{images/fuzzy/variabile_orario.pdf}
-  \caption{Variabile orario}
-\end{figure}
+\vspace{20px}
+\includegraphics[scale=0.5]{images/fuzzy/variabile_orario.pdf}
+\captionof{figure}[One figure]{Variabile orario}
+\vspace{20px}
 
-Passando ora ad analizzare l'irraggiamento, attraverso lo studio dei dati forniti e del range di valori entro i quali si collocano, gli elementi lessicali sono quattro ({\em Basso, Medio, Alto, Molto Alto}) e le funzioni di appartenenza saranno:
+Passando ora ad analizzare l'irraggiamento, attraverso lo studio dei dati forniti e del range di valori entro i quali si collocano, gli elementi lessicali sono quattro ({\em Basso, Medio, Alto, Molto Alto}) e le funzioni di appartenenza saranno:\\
 
-\begin{figure}
-  \centering
-  \includegraphics[scale=0.5]{images/fuzzy/variabile_irraggiamento.pdf}
-  \caption{Variabile irraggiamento}
-\end{figure}
+\vspace{20px}
+\includegraphics[scale=0.5]{images/fuzzy/variabile_irraggiamento.pdf}
+\captionof{figure}[One figure]{Variabile irraggiamento}
+\vspace{20px}
 
-Si possono ottenere con gli stessi ragionamenti risultati simili anche per la Luminosità:
+Si possono ottenere con gli stessi ragionamenti risultati simili anche per la Luminosità:\\
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[scale=0.5]{images/fuzzy/variabile_luminosita.pdf}
-  \caption{Variabile luminosità}
-\end{figure}
-
+\vspace{20px}
+\includegraphics[scale=0.5]{images/fuzzy/variabile_luminosita.pdf}
+\captionof{figure}[One figure]{Variabile luminosità}
+\vspace{20px}
 
 \subsubsection{Definizione delle regole}
 Non possedendo un'esperienza sufficiente nel campo dell'illuminazione per poter definire delle regole generali per il sistema fuzzy in esame, verranno estrapolate dai dati in nostro possesso le regole valide per il modello.
 
-Nello specifico sono state ricavate le seguenti:
+Nello specifico sono state ricavate le seguenti:\\
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[scale=0.5]{images/fuzzy/regole_luminosita.pdf}
-  \caption{Regole luminosità}
-\end{figure}
+\vspace{20px}
+\includegraphics[scale=0.5]{images/fuzzy/regole_luminosita.pdf}
+\captionof{figure}[One figure]{Regole luminosità}
+\vspace{20px}
 
-A questo punto il FIS è completamente definita e si possono visualizzare le regole tramite il “Rule Viewer” e la curva tridimensionale che lega l'uscita ai due ingressi nel “Surface Viewer”:
+A questo punto il FIS è completamente definita e si possono visualizzare le regole tramite il “Rule Viewer” e la curva tridimensionale che lega l'uscita ai due ingressi nel “Surface Viewer”:\\
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[scale=0.5]{images/fuzzy/regole_luminosita_rule_view.pdf}
-  \caption{Regole luminosità rule view}
-\end{figure}
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[scale=0.5]{images/fuzzy/regole_luminosita_surface_view.pdf}
-  \caption{Regole luminosità surface view}
-\end{figure}
-
+\vspace{20px}
+\includegraphics[scale=0.5]{images/fuzzy/regole_luminosita_rule_view.pdf}
+\captionof{figure}[One figure]{Regole luminosità rule view}
+\vspace{20px}
+\vspace{20px}
+\includegraphics[scale=0.5]{images/fuzzy/regole_luminosita_surface_view.pdf}
+\captionof{figure}[One figure]{Regole luminosità surface view}
+\vspace{20px}
 
 \subsubsection{Manipolazione e studio dei risultati}
 Una volta che il FIS è completamente definito deve essere valutato per testarne l'attendibilità.
@@ -120,38 +110,25 @@ Per il caso in esame si ha una corrispondenza per 802 campioni, ovvero successo 
 
 
 \subsubsection{Energia - Feriali}
-Inseriamo, per completezza, i risultati finali ottenuti per le funzioni di appartenenza per la variabile d'uscita Consumo Energetico:
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[scale=0.5]{images/fuzzy/modello_fuzzy.pdf}
-  \caption{Modello fuzzy}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[scale=0.5]{images/fuzzy/variabile_consumo_energetico.pdf}
-  \caption{Variabile consumo energetico}
-\end{figure}
-
-Per lo studio dell'energia nei giorni feriali, effettuando gli stessi ragionamenti e seguendo la procedura appena descritta otteniamo:
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[scale=0.5]{images/fuzzy/energia_feriali_regole.pdf}
-  \caption{Energia feriali: regole}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[scale=0.5]{images/fuzzy/energia_feriali_rule_view.pdf}
-  \caption{Energia feriali: rule view}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[scale=0.5]{images/fuzzy/energia_feriali_surface_view.pdf}
-  \caption{Energia feriali: surface view}
-\end{figure}
-
+Inseriamo, per completezza, i risultati finali ottenuti per le funzioni di appartenenza per la variabile d'uscita Consumo Energetico:\\
+\vspace{20px}
+\includegraphics[scale=0.5]{images/fuzzy/modello_fuzzy.pdf}
+\captionof{figure}[One figure]{Modello fuzzy}
+\vspace{20px}
+\includegraphics[scale=0.5]{images/fuzzy/variabile_consumo_energetico.pdf}
+\captionof{figure}[One figure]{Variabile consumo energetico}
+\vspace{20px}
+Per lo studio dell'energia nei giorni feriali, effettuando gli stessi ragionamenti e seguendo la procedura appena descritta otteniamo:\\
+\vspace{20px}
+\includegraphics[scale=0.5]{images/fuzzy/energia_feriali_regole.pdf}
+\captionof{figure}[One figure]{Energia feriali: regole}
+\vspace{20px}
+\includegraphics[scale=0.5]{images/fuzzy/energia_feriali_rule_view.pdf}
+\captionof{figure}[One figure]{Energia feriali: rule view}
+\vspace{20px}
+\includegraphics[scale=0.5]{images/fuzzy/energia_feriali_surface_view.pdf}
+\captionof{figure}[One figure]{Energia feriali: surface view}
+\vspace{20px}
 \begin{table}
   \caption{Risultati}
   \centering
@@ -167,25 +144,16 @@ Per lo studio dell'energia nei giorni feriali, effettuando gli stessi ragionamen
 
 
 \subsubsection{Luminosità - Festivi}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[scale=0.5]{images/fuzzy/luminosita_festivi_regole.pdf}
-  \caption{Luminosità festivi: regole}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[scale=0.5]{images/fuzzy/luminosita_festivi_rule_view.pdf}
-  \caption{Luminosità festivi: rule view}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[scale=0.5]{images/fuzzy/luminosita_festivi_surface_view.pdf}
-  \caption{Luminosità festivi: surface view}
-\end{figure}
-
+\vspace{20px}
+\includegraphics[scale=0.5]{images/fuzzy/luminosita_festivi_regole.pdf}
+\captionof{figure}[One figure]{Luminosità festivi: regole}
+\vspace{20px}
+\includegraphics[scale=0.5]{images/fuzzy/luminosita_festivi_rule_view.pdf}
+\captionof{figure}[One figure]{Luminosità festivi: rule view}
+\vspace{20px}
+\includegraphics[scale=0.5]{images/fuzzy/luminosita_festivi_surface_view.pdf}
+\captionof{figure}[One figure]{Luminosità festivi: surface view}
+\vspace{20px}
 \begin{table}
   \caption{Risultati}
   \centering
@@ -201,25 +169,16 @@ Per lo studio dell'energia nei giorni feriali, effettuando gli stessi ragionamen
 
 
 \subsubsection{Energia - Festivi}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[scale=0.5]{images/fuzzy/energia_festivi_regole.pdf}
-  \caption{Energia festivi: regole}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[scale=0.5]{images/fuzzy/energia_festivi_rule_view.pdf}
-  \caption{Energia festivi: rule view}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[scale=0.5]{images/fuzzy/energia_festivi_surface_view.pdf}
-  \caption{Energia festivi: surface view}
-\end{figure}
-
+\vspace{20px}
+\includegraphics[scale=0.5]{images/fuzzy/energia_festivi_regole.pdf}
+\captionof{figure}[One figure]{Energia festivi: regole}
+\vspace{20px}
+\includegraphics[scale=0.5]{images/fuzzy/energia_festivi_rule_view.pdf}
+\captionof{figure}[One figure]{Energia festivi: rule view}
+\vspace{20px}
+\includegraphics[scale=0.5]{images/fuzzy/energia_festivi_surface_view.pdf}
+\captionof{figure}[One figure]{Energia festivi: surface view}
+\vspace{20px}
 \begin{table}
   \caption{Risultati}
   \centering

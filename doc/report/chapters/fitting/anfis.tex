@@ -1,3 +1,4 @@
+\subsection{A.N.F.I.S.}
 Finora abbiamo supposto di conoscere a fondo ogni caratteristica del problema che ci viene posto (ci siamo comportati da “esperti”) , supponiamo adesso invece di essere in presenza del seguente scenario:
 
 \begin{itemize}
@@ -6,12 +7,12 @@ Finora abbiamo supposto di conoscere a fondo ogni caratteristica del problema ch
   \item Non è presente una struttura predeterminata del modello basata sulle caratteristiche delle variabili del sistema.
 \end{itemize}
 
-In uno scenario come questo vengono utilizzate quelle che vengono chiamate reti adattive, ovvero reti multistrato dove ogni nodo esegue una particolare funzione sui segnali ricevuti in ingresso, e dove ognuno di essi può contenere (in linea generale) dei parametri.
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[scale=0.5]{images/anfis/adaptive.png}
-  \caption{I nodi quadrati contengono parametri ed eseguono funzioni, gli altri eseguono solo funzioni}
-\end{figure}
+In uno scenario come questo vengono utilizzate quelle che vengono chiamate reti adattive, ovvero reti multistrato dove ogni nodo esegue una particolare funzione sui segnali ricevuti in ingresso, e dove ognuno di essi può contenere (in linea generale) dei parametri.\\
+
+\vspace{20px}
+\includegraphics[scale=0.5]{images/anfis/adaptive.png}
+\captionof{figure}[One figure]{I nodi quadrati contengono parametri ed eseguono funzioni, gli altri eseguono solo funzioni}
+\vspace{20px}
 
 Con il termine A.N.F.I.S. (adaptive network based fuzzy inference system) si indica una classe di reti adattive funzionalmente equivalenti al sistema di inferenza fuzzy; in particolare utilizzando reti di tipo A.N.F.I.S. è possibile costruire una rete del tutto equivalente al sistema di inferenza Takagi-Sugeno-Kang.
 
@@ -27,7 +28,7 @@ Il tool anfis supporta solamente sistemi di tipo Sugeno, aventi le seguenti cond
   \item Il sistema Sugeno deve essere di grado uno o zero.
   \item Deve presentare una singola uscita ottenuta mediante il metodo di defuzzificazione della media pesata.
   \item Tutte le funzioni di appartenenza dell'uscita devono essere dello stesso tipo e devono essere lineari o costanti.
-  \item Diverse regole non possono condividere la stessa funzione di appartenenza di uscita.
+  \item Diverse regole non possono condividere la stessa funzione di appartenenza di uscita; quindi il numero di funzioni membro delle uscita deve essere uguale al numero di regole.
   \item Possiede peso unitario per ogni regola % FIXME: * Have unity weight for each rule (che minchia vuol dire???)
 \end{itemize}
 
@@ -79,25 +80,19 @@ Questa funzione stampa a schermo le uscite di una rete dato un vettore di ingres
 
 %% FIXME: Qui servirebbero un po piu di figure come ad esempio l'andamento degli errori! L'unica cosa è che avendo svolto questo punto con il tool si ottengono usando anfisedit
 
-Sono sotto riportati i grafici (ottenuti nelle tre reti relativi ai casi di tests) che mostrano le relazioni output/target.
+Sono sotto riportati i grafici (ottenuti nelle tre reti relativi ai casi di tests) che mostrano le relazioni output/target.\\
+\vspace{20px}
+\includegraphics[scale=0.5]{images/anfis/holiday/inlight.pdf}
+\captionof{figure}[One figure]{Luce interna nei giorni festivi}
+\vspace{20px}
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[scale=0.5]{images/anfis/holiday/inlight.pdf}
-  \caption{Luce interna nei giorni festivi}
-\end{figure}
+\includegraphics[scale=0.5]{images/anfis/workday/inlight.pdf}
+\captionof{figure}[One figure]{Luce interna nei giorni feriali}
+\vspace{20px}
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[scale=0.5]{images/anfis/workday/inlight.pdf}
-  \caption{Luce interna nei giorni feriali}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[scale=0.5]{images/anfis/workday/energy.pdf}
-  \caption{Energia consumata nei giorni feriali}
-\end{figure}
+\includegraphics[scale=0.5]{images/anfis/workday/energy.pdf}
+\captionof{figure}[One figure]{Energia consumata nei giorni feriali}
+\vspace{20px}
 
 La seguente tabella riporta invece i singoli errori (misurati come differenza tra target ed output) delle tre reti:
 

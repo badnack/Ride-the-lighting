@@ -5,9 +5,9 @@ Una rete neurale con elementi di ritardo presenta un uscita dipendente, oltre ch
 Scopo di queste reti è quello di usare valori passati di una serie temporale per predire quelli futuri: se indichiamo con x(t) il vettore di input all’istante t, e con y(t) il vettore di output al medesimo istante, abbiamo che y(t) sarà funzione degli ultimi N vettori risultato del sistema e degli ultimi N vettori di input.
 
 %% FIXME: riscrivere usando sintassi latex standard
-%% $$
-%% y(t)=f(y(t\lyxmathsym{\textminus}1),y(t\lyxmathsym{\textminus}2),...,y(t\lyxmathsym{\textminus}N),x(t\lyxmathsym{\textminus}1),x(t\lyxmathsym{\textminus}2),...,x(t\lyxmathsym{\textminus}N))
-%% $$
+$$
+y(t)=f(y(t\lyxmathsym{\textminus}1),y(t\lyxmathsym{\textminus}2),...,y(t\lyxmathsym{\textminus}N),x(t\lyxmathsym{\textminus}1),x(t\lyxmathsym{\textminus}2),...,x(t\lyxmathsym{\textminus}N))
+$$
 
 Anche in questo caso, ad ogni passo dell'addestramento, il vettore di output generato dal sistema viene confrontato con il corrispondente vettore obiettivo, e a seconda della differenza vengono opportunamente aggiornati i pesi dei neuroni che compongono gli strati nascosti e lo strato di uscita, fino ad ottenere un livello di generalizzazione soddisfacente.
 
@@ -15,14 +15,12 @@ L'approccio usato per la modellizzazione di questa rete è del tutto analogo a q
 
 Infine anche in questo caso poteva essere utilizzato direttamente il tool proposto da Matlab (nntstool), usufruendo quindi della GUI proposta, ma per gli stessi inconvenienti già esposti, è stato deciso di creare uno script analogo al caso precedente per ricavare questo tipo di rete in modo automatico.
 
-Il tipo di rete che tratteremo in questa sezione è quella mostrata nella figura seguente:
+Il tipo di rete che tratteremo in questa sezione è quella mostrata nella figura seguente:\\
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[scale=0.5]{images/timeseries/energia/net.png}
-  \caption{Rete neurale esogena autoregressiva}
-\end{figure}
-
+\vspace{20px}
+\includegraphics[scale=0.5]{images/timeseries/energia/net.png}
+\captionof{figure}[One figure]{Rete neurale esogena autoregressiva}
+\vspace{20px}
 
 \subsubsection{Suddivisione dei dati}
 
@@ -85,80 +83,58 @@ Scopo di questo script matlab è quello di invocare la funzione appena enunciata
 \subsubsection{Risultati}
 
 \paragraph{Energia consumata}
-%% FIXME: è duplicata!!!
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[scale=0.5]{images/timeseries/energia/net.png}
-  \caption{Rete usata}
-\end{figure}
+\hspace{10px} \\
+\vspace{20px}
+\includegraphics[scale=0.5]{images/timeseries/energia/net.png}
+\captionof{figure}[One figure]{Rete usata}
+\vspace{20px}
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[scale=0.5]{images/timeseries/energia/regressions.pdf}
-  \caption{Retta di regressione}
-\end{figure}
+\includegraphics[scale=0.5]{images/timeseries/energia/regressions.pdf}
+\captionof{figure}[One figure]{Retta di regressione}
+\vspace{20px}
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[scale=0.5]{images/timeseries/energia/histogram.pdf}
-  \caption{Istrogramma degli errori}
-\end{figure}
+\includegraphics[scale=0.5]{images/timeseries/energia/histogram.pdf}
+\captionof{figure}[One figure]{Istrogramma degli errori}
+\vspace{20px}
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[scale=0.5]{images/timeseries/energia/performances.pdf}
-  \caption{Performance}
-\end{figure}
+\includegraphics[scale=0.5]{images/timeseries/energia/performances.pdf}
+\captionof{figure}[One figure]{Performance}
+\vspace{20px}
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[scale=0.5]{images/timeseries/energia/autocorrelations.pdf}
-  \caption{Autocorrelazione errore}
-\end{figure}
+\includegraphics[scale=0.5]{images/timeseries/energia/autocorrelations.pdf}
+\captionof{figure}[One figure]{Autocorrelazione errore}
+\vspace{20px}
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[scale=0.5]{images/timeseries/energia/correlations.pdf}
-  \caption{Correlazione tra input e output}
-\end{figure}
+\includegraphics[scale=0.5]{images/timeseries/energia/correlations.pdf}
+\captionof{figure}[One figure]{Correlazione tra input e output}
+\vspace{20px}
 
 
 \paragraph{Luce interna}
+\hspace{10px} \\
+\vspace{20px}
+\includegraphics[scale=0.5]{images/timeseries/inlight/net.png}
+\captionof{figure}[One figure]{Rete usata}
+\vspace{20px}
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[scale=0.5]{images/timeseries/inlight/net.png}
-  \caption{Rete usata}
-\end{figure}
+\includegraphics[scale=0.5]{images/timeseries/inlight/regressions.pdf}
+\captionof{figure}[One figure]{Retta di regressione}
+\vspace{20px}
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[scale=0.5]{images/timeseries/inlight/regressions.pdf}
-  \caption{Retta di regressione}
-\end{figure}
+\includegraphics[scale=0.5]{images/timeseries/inlight/histogram.pdf}
+\captionof{figure}[One figure]{Istrogramma degli errori}
+\vspace{20px}
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[scale=0.5]{images/timeseries/inlight/histogram.pdf}
-  \caption{Istrogramma degli errori}
-\end{figure}
+\includegraphics[scale=0.5]{images/timeseries/inlight/performances.pdf}
+\captionof{figure}[One figure]{Performance}
+\vspace{20px}
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[scale=0.5]{images/timeseries/inlight/performances.pdf}
-  \caption{Performance}
-\end{figure}
+\includegraphics[scale=0.5]{images/timeseries/inlight/autocorrelations.pdf}
+\captionof{figure}[One figure]{Autocorrelazione errore}
+\vspace{20px}
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[scale=0.5]{images/timeseries/inlight/autocorrelations.pdf}
-  \caption{Autocorrelazione errore}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[scale=0.5]{images/timeseries/inlight/correlations.pdf}
-  \caption{Correlazione tra input e output}
-\end{figure}
+\includegraphics[scale=0.5]{images/timeseries/inlight/correlations.pdf}
+\captionof{figure}[One figure]{Correlazione tra input e output}
+\vspace{20px}
 
 \clearpage

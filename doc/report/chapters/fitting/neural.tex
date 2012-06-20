@@ -13,14 +13,12 @@ Al fine di ottenere un apprendimento soddisfacente, ovvero che minimizzi l’err
 
 Prima di procedere con la spiegazione di tali scripts, è doveroso mostrare quale struttura è stata utilizzata per modellare la rete neurale.
 
-Come possiamo vedere dalla figura sottostante essa prevede uno strato nascosto, composto in linea generale da un numero di neuroni impostabile dall'utente (12 nell'esempio), con funzione di attivazione sigmoide ed uno strato lineare di uscita.
+Come possiamo vedere dalla figura sottostante essa prevede uno strato nascosto, composto in linea generale da un numero di neuroni impostabile dall'utente (12 nell'esempio), con funzione di attivazione sigmoide ed uno strato lineare di uscita.\\
 
-\begin{figure}
-  \centering
-  \includegraphics[scale=0.5]{images/neural_net/net.png}
-  \caption{Modello di rete neurale}
-\end{figure}
-
+\vspace{20px}
+\includegraphics[scale=0.5]{images/neural_net/net.png}
+\captionof{figure}[One figure]{Modello di rete neurale}
+\vspace{20px}
 
 \subsubsection{Ricerca della migliore rete neurale}
 Nell'ottica di automatizzare il processo di modellizzazione della rete, è stata definita sia una funzione per la ricerca di una rete neurale statica considerata ottima, sia uno script per la visualizzazione dei risultati ottenuti.
@@ -52,24 +50,19 @@ In questo script viene inoltre fatto uso della funzione {\bf unix} di matlab per
 
 
 \subsubsection{Risultati}
-I risultati ottenuti eseguendo lo script sono i seguenti:
+I risultati ottenuti eseguendo lo script sono i seguenti:\\
+\vspace{20px}
 
-\begin{figure}
-  \centering
-  \includegraphics[scale=0.7]{images/neural_net/histogram.pdf}
-  \caption{Istogramma degli errori}
-\end{figure}
+\includegraphics[scale=0.7]{images/neural_net/histogram.pdf}
+\captionof{figure}[One figure]{Istogramma degli errori}
+\vspace{20px}
 
-\begin{figure}
-  \centering
-  \includegraphics[scale=0.7]{images/neural_net/performances.pdf}
-  \caption{Prestazioni della rete (MSE)}
-\end{figure}
+\includegraphics[scale=0.7]{images/neural_net/performances.pdf}
+\captionof{figure}[One figure]{Prestazioni della rete (MSE)}
+\vspace{20px}
 
-\begin{figure}
-  \centering
-  \includegraphics[scale=0.7]{images/neural_net/regressions.pdf}
-  \caption{Rette di regressione}
-\end{figure}
+\includegraphics[scale=0.7]{images/neural_net/regressions.pdf}
+\captionof{figure}[One figure]{Rette di regressione}
+\vspace{20px}
 
 \clearpage
