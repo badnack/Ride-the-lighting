@@ -27,10 +27,15 @@ Nell'ottica di automatizzare il processo di modellizzazione della rete, è stata
 
 \paragraph{Funzione searchBestFitting}
 Essa provvede alla creazione di una rete neurale al suo addestramento, e all'estrazione dei parametri di interesse quali il coefficiente della retta di regressione ( nel caso test ) e le performances ( valutate sull'MSE ).
+
 La funzione inizializza, e quindi allena, la rete neurale RETRAIN\_ATTEMPTS volte e restituisce alla fine la migliore rete trovata: ovvero quella che ha presentato nella fase di test i migliori parametri.
+
 Chiaramente sono stati impostati anche due GOALs oltre cui la rete ricavata è considerata ottima, nello specifico si consiedera una rete ottima se i valori di regressione sono maggiori o uguale a 0.99 ed MSE minore di 1000.
+
 Ad ogni passo i parametri discriminanti per la bontà della rete sono quelli della fase di test in quanto indicanti la capacità della rete di generalizzare, e dunque di aver correttamente appreso.
+
 E' importante notare che dopo ogni RETRAIN\_ATTEMPTS la struttura interna della rete viene modificata variando il numero di neuroni dello strato nascosto, in modo da confrontare tra loro diverse configurazioni; infine la funzione di addestramento utilizzata è quella standard di backpropagation di Levenberg-Marquardt (trainlm).
+
 La funzione appena esposta è la seguente:
 
 \inputminted[linenos=true,fontsize=\footnotesize]{matlab}{../../src/neural\ network/functions/searchBestFitting.m}
@@ -39,6 +44,7 @@ La funzione appena esposta è la seguente:
 
 \paragraph{Script netfit}
 Tale script si occupa semplicemente di inizalizzare il vettori inputs/outputs, richiamare la funzione appena illustrata e quindi stampare a schermo i risultati ottenuti.
+
 In questo script viene inoltre fatto uso della funzione {\bf unix} di matlab per eseguire lo sript conform.rb per la creazione dei dati necessari alla funzione searchBestFitting.
 
 \inputminted[linenos=true,fontsize=\footnotesize]{matlab}{../../src/netfit.m}
