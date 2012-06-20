@@ -1,15 +1,21 @@
 \begin{document}
 \maketitle
-\thispagestyle{fancy}       % Enabling the custom headers/footers for the first page
+% \thispagestyle{fancy}       % Enabling the custom headers/footers for the first page
+\clearpage
+
+
+\tableofcontents
+\clearpage
+
 
 \section{Introduzione}
 \subsection{Analisi del problema}
 % The first character should be within \initial{}
-\initial{I}l progetto che andiamo a presentare consiste nell’applicazione delle tecniche di Computational Intelligence per la predizione dei consumi energetici di un edificio adibito ad uffici, relativamente all’impianto di illuminazione.
+\initial{I}l progetto consiste nell'applicazione delle tecniche di Computational Intelligence alla predizione dei consumi energetici di un edificio, adibito ad uffici, relativamente all'impianto di illuminazione.
 
-Lo scopo è dunque quello di predire l'andamento dei consumi e della luminosità all'interno di un edificio implementando quattro diverse tecniche di computational intelligence.
+Lo scopo è quello di predire l'andamento dei consumi e della luminosità all'interno di un edificio implementando quattro diverse tecniche di computational intelligence.
 
-I dati raccolti sono stati sistemati in forma tabellare e riguardano i consumi registrati durante i mesi di maggio e giugno 2005; in particolare un singolo campione è costituito da:
+I dati raccolti sono stati sistemati in forma tabellare e riguardano i consumi registrati in 30 giorni tra maggio/giugno 2005. In particolare un singolo campione è costituito da:
 
 \begin{itemize}
   \item Giorno
@@ -22,3 +28,35 @@ I dati raccolti sono stati sistemati in forma tabellare e riguardano i consumi r
   \item Energia media consumata
   \item Tipo di giorno (lavorativo/festivo)
 \end{itemize}
+
+La luminosità interna viene misurata in $Lux$ ed è stata monitorata attraverso a sensore, l’irraggiamento solare viene rappresentato in $W/m^2$ ed indica la quantità di radiazione solare per unità di superficie; infine l'energia consumata è espressa in $Wh$.
+
+
+\subsection{Analisi dei dati}
+Dal momento che le tecniche che andremo ad analizzare richiedono delle particolari strutture in ingresso, il primo passo è dunque lo studio dei dati forniti atto all'ottimizzazione della struttura interna del modello.
+
+Per prima cosa è doveroso far presente che nei dati è presente un errore nel sample inerente al 30 maggio ( un lunedì ); infatti come è possibile vedere dai dati, tale giorno è marcato come festivo.
+
+Si è dapprima supposto che si trattasse di una qualche festività ( ad esempio il 30 maggio ricorreva il Memorial Day negli U.S.A. ), ma osservando i dati di consumo rilevati, si è subito capito che si trattava semplicemente di un errore.
+
+Un primo possibile approccio risolutivo poteva essere quello di correggere a mano l'errore, bensì vedremo a breve come è stato affrontato il problema.
+
+Osservando i dati si nota che l'anno in questione non cambia ( sono stati campionati solo due mesi ), è dunqe plausibile pensare che l'ingresso 'Anno' non influenzi l'output delle reti che andremo a modellare, e che quindi sia del tutto superfluo; motivo per cui è stato rimosso.
+
+Inoltre, per migliorare le performances delle reti modellate, i dati sono stati mediati con steps di un ora, elimimando quindi anche l'ingresso Minuti; in questo modo gli effetti sulla rete di eventuali picchi anomali (tra i dati campionati) vengono attenuati.
+
+Infine si è scelto di suddividere i due mesi in settimane ( da 1 a 8 ) ed i giorni in “giorni setttimanali” ( da 1 a 7 ); così facendo è stato possibile eliminare l'ingresso 'Tipo di giorno'.
+
+Quest'ultima operazione è stata possibile secondo la seguente considerazione: se il giorno è festivo (sabato o domenica) i consumi energetici sono pressochè nulli, cosa che non accade quando il giorno è lavorativo ( da lunedi a venerdi). 
+
+In sostanza abbiamo trasportato l'informazione che forniva l'ingresso 'Tipo di giorno' al numero di giorno della settimana; sarà poi compito della rete apprendere l'andamento dei consumi durante la settimana; così facendo è stato inoltre possibile correggere l'errore presente nei dati senza intervenire a mano.
+
+Infine è importante notare che l'ingresso 'Tipo di giorno' non sarebbe divenuto inutile qualora nei mesi campionati fossero state presenti festività particolari ( Natale, Pasqua etc ).
+
+Quanto fin'ora descritto è stato reso possibile attraverso lo script ruby sotto riportato.
+
+\inputminted[linenos=true,fontsize=\footnotesize]{ruby}{../../data/conform.rb}
+\captionof{listing}{data/conform.rb}
+
+
+\clearpage

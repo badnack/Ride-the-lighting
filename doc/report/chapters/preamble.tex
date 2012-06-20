@@ -23,6 +23,7 @@
 \usepackage{subfig}                          % Subfigures
 \usepackage{booktabs}                        % Nicer tables
 \usepackage{fix-cm}                          % Custom fontsizes
+\usepackage{minted}                          % Color highlighted source code
 
 
 
@@ -83,8 +84,12 @@
 \author{F. Disperati, D. Pellegrino, N. Redini, }                      % Author name goes here
 \postauthor{\footnotesize \usefont{OT1}{phv}{m}{sl} \color{Black}
           University of Pisa                   % Institution of author
-          \vskip 1em
-          Anno Accademico 2011/2012
-          \par\end{flushleft}\HorRule}
+          \par\end{flushleft}\HorRule
 
-\date{}                                        % No date
+          \begin{flushleft}
+            \footnotesize \usefont{OT1}{phv}{m}{sl} \color{Black}
+            Anno Accademico 2011/2012
+          \end{flushleft}
+}
+
+\date{}
